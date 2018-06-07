@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+		<meta name="description" content="Institut für Informatik"/>
+		<title>Compilerbau</title>
+		<style type="text/css">
+			a.dis { color:#c0c0c0; }
+			h4.new { color:#690e13; }
+			p.new:before { content:"Neu: "; }
+			p.new { color:#690e13; }
+		</style>
+
+	</head>
+	<body>
+
+		<div id="Content"> 
+			<h1>Compilerbau</h1>
+
+			<h2>Aufgabe 5</h2>
+
+            <h3>Generelles</h3>
+            <p>Dies Aufgabe dient der Vertiefung Ihres Verständnis' von LL(1)-Parsern. Sie implementieren einen top-down Parser der Sprache C(-1).</p>
+
+            <h4>Abgabetermin</h4>
+            <p>Sonntag, 10.06.2018 (23:55 Uhr)</p>
+
+            <h4>Allgemeine Hinweise</h4>
+            <p>Für diese und alle folgenden Praktikumsaufgaben gilt, dass Einsendungen, die in der jeweils mitgegebenen Testumgebung nicht laufen, mit null Punkten bewertet werden! Das beinhaltet insbesondere alle Programme, die sich nicht fehlerfrei kompilieren lassen. Als Testsystem werden wir dabei&nbsp;<code>gruenau1</code>&nbsp;mit den dort installierten Compilern und Compilerwerkzeugen benutzen. Prüfen Sie bitte&nbsp;<em>rechtzeitig</em>&nbsp;vor der Abgabe, ob ihr Programm auch dort lauffähig ist. Wir akzeptieren keine Entschuldigungen der Form „aber bei mir zuhause hat es funktioniert“ ;).</p>
+            <p>Ebenfalls mit null Punkten werden alle Abgaben bewertet, die sich nicht exakt an die vorgegebenen Formate halten. Hier sollen insbesondere falsch gepackte Archive erwähnt werden (die nicht alle nötigen/die falschen/zu viele Dateien enthalten, eine falsche Verzeichnisstruktur besitzen, ...).</p>
+
+            <h4>Abgabemodus</h4>
+            <p>Die Abgabe erfolgt digital über das&nbsp;<a href="https://moodle.hu-berlin.de/">Moodle-System</a>. Die Quell- und Headerdateien sind in einer Datei&nbsp;<strong>loesung3.tar.gz</strong>&nbsp;verpackt abzugeben. In dieser tar.gz-Datei soll&nbsp;<em>ausschließlich</em>&nbsp;die Dateien&nbsp;<code>minako-syntax.c</code>&nbsp;(ohne irgendwelche Unterverzeichnisse!) enthalten sein.</p><p>Zur Lösung der Aufgaben steht für Sie eine Datei&nbsp;<a href="https://moodle.hu-berlin.de/draftfile.php/1729204/user/draft/365895790/uebung2.tar.gz">uebung3.tar.gz</a>&nbsp;zur Verfügung. Sie enthält&nbsp;ein vorgegebenes&nbsp;<code>makefile</code>, einen Scanner <code>minako-lexic.c</code>, eine Header-Datei <code>minako.h</code> sowie eine Testeingabe <code>beispiel.c-1</code>.</p>
+            <p>Noch ein Hinweis zu den Compilerwarnungen: Nach wir vor gilt, dass wir für Warnungen bei der Kompilation Punkte abziehen, es kann allerdings passieren, dass sich Warnungen im von&nbsp;<code>flex</code>&nbsp;generierten Quelltext nicht auf einfache Weise vermeiden lassen. Diese Warnungen tolerieren wir, aber ansonsten keine.</p>
+
+            <h3>Aufgabe 1 (50 Punkte)</h3>
+            <h4>Kurzbeschreibung</h4>
+            <p>Implementieren Sie von Hand einen Parser, der die Sprache C(-1) (eine Teilsprache von C1) erkennen kann.&nbsp;Verwenden sie dazu den beigelegten Scanner.</p>
+
+            <h4>Aufgabenstellung</h4>
+            <p>
+                Nachdem Sie in der letzten Praktikumsaufgabe einen Scanner für die 
+                lexikalische Analyse gebaut haben, sollen Sie sich diesmal mit der 
+                syntaktischen Analyse beschäftigen. Wie Sie bereits in der Vorlesung gelernt haben, gibt es 
+                mehrere Ansätze, einen Parser zu bauen.  Insbesondere wird dabei zwischen handgeschriebenen 
+                Parsern und (durch Parsergeneratoren) generierten Parsern unterschieden.<br>In dieser Aufgabe soll ein handgeschriebener Parser nach dem Prinzip des rekursiven Abstiegs implementiert werden. Da ein handgeschriebener Parser in der Regel ziemlich umfangreich ist, haben wir uns dazu entschlossen, die Sprache C1 (die ja
+                durch Abrüsten aus C entstanden ist) noch einmal zu vereinfachen, um Ihnen extreme Tipporgien zu ersparen.<br>Sie finden die Grammatik von C(-1) <a href="https://amor.cms.hu-berlin.de/%7Ekunert/lehre/material/c-1-grammar.php">hier</a>. Zusätzlich sind folgende Punkte zu beachten:<br>
+            </p>
+            <ul>
+                <li>
+                    wenn man den Parser ohne Kommandozeilenparameter aufruft, soll er von stdin lesen, ansonsten aus der auf der Kommandozeile angegebenen Datei 
+                    (dabei sollen eventuell auftauchende Dateizugriffsfehler wie üblich abgefangen werden)<br></li>
+                <li>
+                    die Implementation hat in einer Datei namens <code>minako-syntax.c</code> zu erfolgen<br>
+                </li>
+                <li>
+                    der Parser gibt im erfolgreichen Fall <em>nichts</em> aus und beendet sich mit dem Rückgabewert 0<br>
+                </li>
+                <li>
+                    bei einem Parserfehler wird eine Fehlermeldung (beendet durch ein 
+                    Newline) ausgegeben und das Programm mit einem Rückgabewert ungleich 0 
+                    beendet
+                </li>
+                <li>
+                    wenn sie den Parser auf das mitgelieferte C(-1)-Beispielprogramm <code>beispiel.c-1</code>
+                    ansetzen, sollte er entsprechend nichts ausgeben und sich mit 
+                    Rückgabewert 0 beenden - sehen Sie bitte diesen Test als 
+                    Mindestvoraussetzung für eine Abgabe an.
+                </li>
+            </ul>
+            Bitte halten Sie sich des Weiteren an folgende Konventionen:<br>
+            <ul>
+                <li>
+                    Das jeweils aktuelle Token wird in einer Variable namens <code>currentToken</code>, das darauffolgende Token (Lookahead) in einer Variablen namens <code>nextToken</code> gespeichert<br>
+                </li>
+                <li>
+                    Implementieren (und benutzen) Sie eine Funktion namens <code>eat()</code>, die das aktuelle Token „frisst“<br></li><li>
+                    Implementieren (und benutzen) Sie eine Funktion namens
+                    <code>isTokenAndEat()</code>, die überprüft, ob das ihr
+                    übergebene Token gleich dem aktuellen ist. Im Positivfall wird das
+                    aktuelle Token „gefressen“, im Negativfall ein Fehler <code>ERROR:
+                    Syntaxfehler in Zeile (&lt;zeile&gt;)</code> ausgegeben und das Programm mit Exitcode -1
+                    abgebrochen.<br>
+                </li>
+                <li>
+                    Implementieren (und benutzen) Sie eine Funktion namens <code>isToken()</code>, die überprüft, ob das ihr übergebene Token gleich dem aktuellen ist und das Ergebnis des Vergleiches als <code>int</code> kodiert zurückgibt.<br>
+                </li>
+            </ul>
+        </div>
+    </body>
+</html>
+
