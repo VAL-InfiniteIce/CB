@@ -1,0 +1,88 @@
+programm            ::= A
+B                   ::= AB
+                    |   \epsilon
+A                   ::= declassignment ";"
+                    |   functiondefinition
+
+functiondefinition  ::= type id "(" parameterlist ")" "{" statementlist "}"
+                    ::= type id "(" ")" "{" statementlist "}"
+
+parameterlist       ::= type id A
+A                   ::= ("," type id)A
+                    |   \epsilon
+
+functioncall        ::= id "(" A ")"
+A                   ::= B
+                    |   \epsilon
+B                   ::= assignment C
+                    |   assignment
+C                   ::= "," assignment C
+                    |   \episilon
+
+statementlist       ::= A
+                    |   \epsilon
+A                   ::= (block A)
+                    |   \epsilon
+
+block               ::= "{" statementlist "}
+                    ::= statement
+
+statement           ::= #unchanged
+
+statblock           ::= #unchanged
+
+ifstatement         ::= <KW_IF> "(" assignment ")" statblock <KW_ELSE> statblock 
+                    ::= <KW_IF> "(" assignment ")" statblock
+
+forstatement        ::= <KW_FOR> "(" A ";" expr ";" statassignment ")" statblock
+A                   ::= statassignment
+                    |   declassignmnet
+
+dowhilestatement    ::= #unchanged
+
+whilestatement      ::= #unchanged
+
+returnstatement     ::= <KW_RETURN> A
+A                   ::= assignment
+                    |   \epsilon
+
+printf              ::= #unchanged
+
+declassignment      ::= type id A
+A                   ::= "=" assignment
+                    |   \epsilon
+
+type                ::= #unchanged
+
+statassignment      ::= #unchanged
+
+assignment          ::= #unchanged
+
+expr                ::= simpexpr A
+A                   ::= Op simpexpr A
+                    |   \epsilon
+Op                  ::= "=="
+                    |   "!="
+                    |   "<"
+                    |   ">"
+                    |   "<="
+                    |   ">="
+
+simpexpr            ::= "-" term A
+                    |   term A
+A                   ::= Op term A
+                    |   \epsilon
+Op                  ::= "+"
+                    |   "-"
+                    |   "||"
+
+term                ::= factor A
+A                   ::= Op factor A
+                    |   \epsilon
+Op                  ::= "*"
+                    |   "/"
+                    |   "&&"
+
+factor              ::= #unchanged
+
+id                  ::= <ID>
