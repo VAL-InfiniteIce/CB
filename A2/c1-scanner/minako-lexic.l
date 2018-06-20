@@ -1,7 +1,6 @@
 %option noyywrap
 %option yylineno
 %option nounput
-%option nodefault
 %{
 #define TRUE 1
 #define FALSE 0
@@ -47,7 +46,7 @@ EXTRACHAR   [\+\-\*\/\(\)\{\},;:]
 <INITIAL>"false"                    {return CONST_BOOLEAN;}
 <INITIAL>\"                         {BEGIN(STRING);}
 <STRING>\"                          {BEGIN(INITIAL);return CONST_STRING;}
-<STRING>[[:alnum:]]*                {}
+<STRING>[[:alnum:]]*                {yylval.string = yytext;}
 <INITIAL>[[:alpha:]][[:alnum:]]*    {return ID;}
 <INITIAL>{WHITESPACE}+              {}
 <INITIAL>{EXTRACHAR}                {return (int) yytext[0];}
