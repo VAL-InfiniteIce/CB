@@ -1,5 +1,9 @@
 %define parse.error verbose
-%define parse.traceinclude <std
+%define parse.trace
+
+%{
+#include <stdlib.h>
+%}
 
 %code requires {
 	#include <stdio.h>
@@ -44,12 +48,19 @@
 %token CONST_STRING  "string literal"
 %token ID            "identifier"
 
+%left "-" "+"
+%left "*" "/"
+%precedence UMINUS
+%left "("
+%right ")"
+%left "if"
+%right "else"
 %%
 
 
 programm            : /* EMPTY */
-                    | progamm declassignment ";" 
-                    | progamm functiondefinition
+                    | programm declassignment ";" 
+                    | programm functiondefinition
                     ;
 
 functiondefinition  : type id "(" parameterlist ")" "{" statementlist "}"
@@ -62,64 +73,84 @@ fparameters         : /*EMPTY*/
                     | "," type id fparameters
                     ;
 
-functioncall        : id "(" A ")"
+functioncall        : id "(" fass ")" %prec UMINUS
                     ;
 fass                : /*EMPTY */
                     | assignment ffass
                     ;
 ffass               : /* EMPTY */
-                    | fass "," assignment
+                    | ffass "," assignment
                     ;
 
 statementlist       : /* EMPTY */
                     | statementlist block
                     ;
-/* TODO! */
-block               ::= "{" statementlist "}
-                    ::= statement
-/* TODO */
-statement           ::= #unchanged
-/* TODO */
-statblock           ::= #unchanged
 
-ifstatement         : <KW_IF> "(" assignment ")" statblock else
-                    ;
-else                : /* EMPTY */
-                    | <KW_ELSE> statblock 
+block               : "{" statementlist "}"
+                    | statement
                     ;
 
-forstatement        : <KW_FOR> "(" statdecl ";" expr ";" statassignment ")" statblock
+statement           : ifstatement
+                    | forstatement
+                    | whilestatement
+                    | returnstatement ";"
+                    | dowhilestatement ";"
+                    | printf ";"
+                    | declassignment ";"
+                    | statassignment ";"
+                    | functioncall ";"
+                    ;
+
+ifstatement         : KW_IF "(" assignment ")" block 
+                    | KW_IF "(" assignment ")" block KW_ELSE block
+                    ;
+
+forstatement        : KW_FOR "(" statdecl ";" expr ";" statassignment ")" block
                     ;
 statdecl            : statassignment
-                    | declassignmnet
+                    | declassignment
                     ;
-/* TODO */
-dowhilestatement    ::= #unchanged
-/* TODO */
-whilestatement      ::= #unchanged
 
-returnstatement     : <KW_RETURN> assignment
-                    | <KW_RETURN>
+dowhilestatement    : KW_DO block KW_WHILE "(" assignment ")"
                     ;
-/* TODO */
-printf              ::= #unchanged
+
+whilestatement      : KW_WHILE "(" assignment ")" block
+                    ;
+
+returnstatement     : KW_RETURN assignment
+                    | KW_RETURN
+                    ;
+
+printf              : KW_PRINTF "(" printdeci ")"
+                    ;
+
+printdeci           : assignment
+                    | CONST_STRING
+                    ;
 
 declassignment      : type id 
                     | type id "=" assignment
                     ;
-/* TODO */
-type                ::= #unchanged
-/* TODO */
-statassignment      ::= #unchanged
-/* TODO */
-assignment          ::= #unchanged
+
+type                : KW_BOOLEAN
+                    | KW_FLOAT
+                    | KW_INT
+                    | KW_VOID
+                    ;
+
+statassignment      : id "=" assignment
+                    ;
+
+assignment          : statassignment
+                    | expr
+                    ;
 
 expr                : simpexpr fexpr
                     ;
 fexpr               : /* EMPTY */
-                    | Op simpexpr fexpr
+                    | eop simpexpr fexpr
                     ;
-Op                  : "=="
+eop                 : "=="
                     | "!="
                     | "<"
                     | ">"
@@ -131,9 +162,13 @@ simpexpr            : "-" term fterm
                     | term fterm
                     ;
 fterm               : /* EMPTY */
-                    | Op term fterm
+                    /* | fterm "+" term */
+                    /* | fterm "-" term */
+                    /* | fterm "||" term */
+                    | fterm top term
                     ;
-Op                  : "+"
+
+top                 : "+"
                     | "-"
                     | "||"
                     ;
@@ -141,27 +176,35 @@ Op                  : "+"
 term                : factor ffactor
                     ;
 ffactor             : /* EMPTY */
-                    | Op factor ffactor
+                    | fop factor ffactor
                     ;
-Op                  : "*"
+fop                 : "*"
                     | "/"
                     | "&&"
                     ;
 
-/* TODO */
-factor              ::= #unchanged
+factor              : CONST_INT
+                    | CONST_FLOAT
+                    | CONST_BOOLEAN
+                    | functioncall
+                    | id
+                    | "(" assignment ")"
+                    ;
 
-id                  : <ID>
+id                  : ID
                     ;
 
 %%
 
 int main()
 {
-	yydebug=1;
-	return yyparse();
+    printf("HALLLLLO\n");
+    printf("Ergebnis: %d\n", yyparse());
+	return 0; 
 }
 
 void yyerror(const char* msg)
 {
+    printf("FUCK!");
+    return;
 }
