@@ -3,6 +3,7 @@
 
 %{
 #include <stdlib.h>
+#define YYDEBUG 1
 %}
 
 %code requires {
@@ -55,12 +56,19 @@
 %right ")"
 %left "if"
 %right "else"
+
+%start startpro
+
+%token END 0 "end of file"
 %%
 
 
+startpro            : programm
+                    ;
+
 programm            : /* EMPTY */
-                    | programm declassignment ";" 
-                    | programm functiondefinition
+                    | declassignment ";" programm
+                    | functiondefinition programm
                     ;
 
 functiondefinition  : type id "(" parameterlist ")" "{" statementlist "}"
@@ -79,11 +87,11 @@ fass                : /*EMPTY */
                     | assignment ffass
                     ;
 ffass               : /* EMPTY */
-                    | ffass "," assignment
+                    | "," assignment ffass
                     ;
 
 statementlist       : /* EMPTY */
-                    | statementlist block
+                    | block statementlist
                     ;
 
 block               : "{" statementlist "}"
@@ -101,11 +109,11 @@ statement           : ifstatement
                     | functioncall ";"
                     ;
 
-ifstatement         : KW_IF "(" assignment ")" block 
+ifstatement         : KW_IF "(" assignment ")" block
                     | KW_IF "(" assignment ")" block KW_ELSE block
                     ;
 
-forstatement        : KW_FOR "(" statdecl ";" expr ";" statassignment ")" block
+forstatement        : KW_FOR "(" statdecl ";" expr ";" statassignment ")" block { printf("\n"); }
                     ;
 statdecl            : statassignment
                     | declassignment
@@ -128,7 +136,7 @@ printdeci           : assignment
                     | CONST_STRING
                     ;
 
-declassignment      : type id 
+declassignment      : type id
                     | type id "=" assignment
                     ;
 
@@ -148,7 +156,7 @@ assignment          : statassignment
 expr                : simpexpr fexpr
                     ;
 fexpr               : /* EMPTY */
-                    | eop simpexpr fexpr
+                    | eop simpexpr
                     ;
 eop                 : "=="
                     | "!="
@@ -165,7 +173,7 @@ fterm               : /* EMPTY */
                     /* | fterm "+" term */
                     /* | fterm "-" term */
                     /* | fterm "||" term */
-                    | fterm top term
+                    | top term fterm
                     ;
 
 top                 : "+"
@@ -196,15 +204,24 @@ id                  : ID
 
 %%
 
-int main()
+int main(int argc, char* argv[])
 {
-    printf("HALLLLLO\n");
-    printf("Ergebnis: %d\n", yyparse());
-	return 0; 
+    if (argc != 2)
+        yyin = stdin;
+    else
+    {
+        yyin = fopen(argv[1], "r");
+        if (yyin == 0)
+        {
+            fprintf(stderr, "Fehler: Konnte Datei %s nicht zum lesen oeffnen.\n", argv[1]);
+            exit(-1);
+        }
+    }
+	return yyparse();
 }
 
 void yyerror(const char* msg)
 {
-    printf("FUCK!");
-    return;
+    printf("Error in %i: %s\n", yylineno, msg);
+    exit(-1);
 }
