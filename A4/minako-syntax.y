@@ -67,69 +67,69 @@ startpro            : programm
                     ;
 
 programm            : /* EMPTY */
-                    | declassignment ";" programm
+                    | declassignment ';' programm
                     | functiondefinition programm
                     ;
 
-functiondefinition  : type id "(" parameterlist ")" "{" statementlist "}"
-                    | type id "(" ")" "{" statementlist "}"
+functiondefinition  : type id '(' parameterlist ')' '{' statementlist '}'
+                    | type id '(' ')' '{' statementlist '}'
                     ;
 
 parameterlist       : type id fparameters
                     ;
 fparameters         : /*EMPTY*/
-                    | "," type id fparameters
+                    | ',' type id fparameters
                     ;
 
-functioncall        : id "(" fass ")" %prec UMINUS
+functioncall        : id '(' fass ')' %prec UMINUS
                     ;
 fass                : /*EMPTY */
                     | assignment ffass
                     ;
 ffass               : /* EMPTY */
-                    | "," assignment ffass
+                    | ',' assignment ffass
                     ;
 
 statementlist       : /* EMPTY */
                     | block statementlist
                     ;
 
-block               : "{" statementlist "}"
+block               : '{' statementlist '}'
                     | statement
                     ;
 
 statement           : ifstatement
                     | forstatement
                     | whilestatement
-                    | returnstatement ";"
-                    | dowhilestatement ";"
-                    | printf ";"
-                    | declassignment ";"
-                    | statassignment ";"
-                    | functioncall ";"
+                    | returnstatement ';'
+                    | dowhilestatement ';'
+                    | printf ';'
+                    | declassignment ';'
+                    | statassignment ';'
+                    | functioncall ';'
                     ;
 
-ifstatement         : KW_IF "(" assignment ")" block
-                    | KW_IF "(" assignment ")" block KW_ELSE block
+ifstatement         : KW_IF '(' assignment ')' block KW_ELSE block  %prec "else"
+                    | KW_IF '(' assignment ')' block                %prec "if"
                     ;
 
-forstatement        : KW_FOR "(" statdecl ";" expr ";" statassignment ")" block { printf("\n"); }
+forstatement        : KW_FOR '(' statdecl ';' expr ';' statassignment ')' block { printf("\n"); }
                     ;
 statdecl            : statassignment
                     | declassignment
                     ;
 
-dowhilestatement    : KW_DO block KW_WHILE "(" assignment ")"
+dowhilestatement    : KW_DO block KW_WHILE '(' assignment ')'
                     ;
 
-whilestatement      : KW_WHILE "(" assignment ")" block
+whilestatement      : KW_WHILE '(' assignment ')' block
                     ;
 
 returnstatement     : KW_RETURN assignment
                     | KW_RETURN
                     ;
 
-printf              : KW_PRINTF "(" printdeci ")"
+printf              : KW_PRINTF '(' printdeci ')'
                     ;
 
 printdeci           : assignment
@@ -137,7 +137,7 @@ printdeci           : assignment
                     ;
 
 declassignment      : type id
-                    | type id "=" assignment
+                    | type id '=' assignment
                     ;
 
 type                : KW_BOOLEAN
@@ -146,7 +146,7 @@ type                : KW_BOOLEAN
                     | KW_VOID
                     ;
 
-statassignment      : id "=" assignment
+statassignment      : id '=' assignment
                     ;
 
 assignment          : statassignment
@@ -160,24 +160,24 @@ fexpr               : /* EMPTY */
                     ;
 eop                 : "=="
                     | "!="
-                    | "<"
-                    | ">"
                     | "<="
                     | ">="
+                    | "<"
+                    | ">"
                     ;
 
-simpexpr            : "-" term fterm
+simpexpr            : '-' term fterm
                     | term fterm
                     ;
 fterm               : /* EMPTY */
-                    /* | fterm "+" term */
-                    /* | fterm "-" term */
-                    /* | fterm "||" term */
+                    /* | fterm '+' term */
+                    /* | fterm '-' term */
+                    /* | fterm '||' term */
                     | top term fterm
                     ;
 
-top                 : "+"
-                    | "-"
+top                 : '+'
+                    | '-'
                     | "||"
                     ;
 
@@ -186,8 +186,8 @@ term                : factor ffactor
 ffactor             : /* EMPTY */
                     | fop factor ffactor
                     ;
-fop                 : "*"
-                    | "/"
+fop                 : '*'
+                    | '/'
                     | "&&"
                     ;
 
@@ -196,14 +196,13 @@ factor              : CONST_INT
                     | CONST_BOOLEAN
                     | functioncall
                     | id
-                    | "(" assignment ")"
+                    | '(' assignment ')'
                     ;
 
 id                  : ID
                     ;
 
 %%
-
 int main(int argc, char* argv[])
 {
     if (argc != 2)
@@ -217,7 +216,8 @@ int main(int argc, char* argv[])
             exit(-1);
         }
     }
-	return yyparse();
+    yyparse();
+	return 0;
 }
 
 void yyerror(const char* msg)
