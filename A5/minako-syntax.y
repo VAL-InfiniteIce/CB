@@ -81,6 +81,9 @@
     extern int checkType(symtab_symbol_t * self, unsigned int toCompare);
     extern int insertElement();
     extern symtab_symbol_t * checkExistence();
+
+    symtab_symbol_t * currentFunctionHandle = NULL;
+    symtab_symbol_t * currentParameter = NULL;
 %}
 
 %printer { fprintf(yyoutput, "\"%s\"", $$); } <string>
@@ -151,9 +154,10 @@
 start:
 	program {
 		symtab_symbol_t* entry = symtabLookup(tab, "main");
-        if (! entry) { yyerror("a 'void main()' must bedeclared"); }
-        // TODO: Check, if main is of type 'void'
-        // TODO: Check, if main has no parameter
+        if (! entry) { yyerror("a 'void main()' must bedeclared\n"); }
+        if (entry->type != SYNTREE_TYPE_Void) { yyerror("the 'main()' must be of type void!\n"); }
+        if (entry->par_next != NULL) { yyerror("there are no parameters for 'void main()' allowed!\n"); }
+
 		nodeValue(0)->program.body = syntreeNodeAppend(ast, $program, entry->body);
 		nodeValue(0)->program.globals = symtabMaxGlobals(tab);
 	}
@@ -169,17 +173,31 @@ program:
 	;
 
 functiondefinition:
-	type ID[name] {
+	type ID[name]
+    {
 		/* globale Zeiger auf das aktuelle Funktionssymbol */
 		func = symtabSymbol($name, $type);
 		func->is_function = 1;
 		func->body = syntreeNodeEmpty(ast, SYNTREE_TAG_Function);
 		
 		if (symtabInsert(tab, func) != 0)
-			yyerror("double declaration of function %s.", $name);
+        {
+		    yyerror("double declaration of function %s\n.", $name);
+        }
         symtabPrint(tab, stdout);
+        /* Just to be save: */
+        if (currentFunctionHandle != NULL) { fprintf(stderr, "cFH != NULL\n"); exit(-2); }
+        currentFunctionHandle = func;
+        currentParameter = func;
+
 	}
-	'(' opt_parameterlist ')' '{' statementlist[body] '}' {
+	'(' opt_parameterlist ')'
+    {
+        currentParameter = NULL;
+        currentFunctionHandle = NULL;
+    }
+    '{' statementlist[body] '}'
+    {
 		syntreeNodeAppend(ast, func->body, $body);
 		nodeValue(func->body)->function.locals = symtabMaxLocals(tab);
 	}
@@ -196,7 +214,17 @@ parameterlist:
 	;
 
 parameter:
-	type ID
+	type[type] ID[name]
+    {
+        symtab_symbol_t* sym = symtabSymbol($name, $type);
+
+        // TODO check double delcaration in parameters
+        currentParameter->par_next = sym;
+        currentParameter = sym;
+
+        symtabInsert(tab, sym);
+        symtabPrint(tab, stdout);
+    }
 	;
 
 functioncall:
@@ -316,7 +344,7 @@ declassignment:
 		$$ = 0;
         symtab_symbol_t* sym = symtabSymbol($name, $type);
 
-        checkExistence($name);
+        if ( checkExistence($name) ) { yyerror("%s already declared!\n", $name); }
 
         symtabInsert(tab, sym);
         symtabPrint(tab, stdout);
@@ -326,11 +354,9 @@ declassignment:
 		
         $expr = checkType(sym, $expr);
 
-        checkExistence($name);
+        if ( checkExistence($name) ) { yyerror("%s already declared!\n", $name); }
 
 		$$ = syntreeNodePair(ast, SYNTREE_TAG_Assign, syntreeNodeVariable(ast, sym), $expr);
-
-        printf("$$ has %i as value\n", $$);
 
         symtabInsert(tab, sym);
         symtabPrint(tab, stdout);
@@ -348,7 +374,7 @@ statassignment:
 	ID[name] '=' assignment[expr] {
 		symtab_symbol_t* sym = checkExistence($name);
 		
-        if (!sym) { yyerror("%s is defined before declared\n", $name); }
+        if (!sym) { yyerror("%s is used before declaration!\n", $name); }
 
 		if (sym->type != nodeType($expr))
 			$expr = syntreeNodeCast(ast, sym->type, $expr);
@@ -362,7 +388,7 @@ assignment:
 	ID[name] '=' assignment[expr] {
 		symtab_symbol_t* sym = checkExistence($name);
 		
-        if (!sym) { yyerror("%s is defined before declared\n", $name); }
+        if (!sym) { yyerror("%s is used before declaration\n", $name); }
 
 		if (sym->type != nodeType($expr))
 			$expr = syntreeNodeCast(ast, sym->type, $expr);
