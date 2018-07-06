@@ -88,10 +88,12 @@
         symtab_symbol_t * parameter; // = NULL;
     } currentFunction_t ;
 
-    currentFunction_t currentFunction;
     extern int checkType(symtab_symbol_t * self, syntree_nid id);
     extern int insertElement();
     extern symtab_symbol_t * checkExistence();
+
+    currentFunction_t currentFunction;
+    unsigned int blockDepth = 0;
 %}
 
 %printer { fprintf(yyoutput, "\"%s\"", $$); } <string>
@@ -197,13 +199,16 @@ functiondefinition:
         if (currentFunction.functionHandle != NULL) { fprintf(stderr, "cFH != NULL\n"); exit(-2); }
         currentFunction.functionHandle = func;
         currentFunction.parameter = func;
-
+        symtabEnter(tab);
+        ++blockDepth;
 	}
 	'(' opt_parameterlist ')'
     {
     }
     '{' statementlist[body] '}'
     {
+        --blockDepth;
+        symtabLeave(tab);
         currentFunction.parameter = NULL;
         currentFunction.functionHandle = NULL;
 
@@ -232,7 +237,7 @@ parameter:
         currentFunction.parameter->par_next = sym;
         currentFunction.parameter = sym;
 
-        symtabInsert(tab, sym);
+        if ( symtabInsert(tab, sym) ) { yyerror("2 parameter with the same name: %s already used!\n", $name); }
         symtabPrint(tab, stdout);
     }
 	;
@@ -365,9 +370,9 @@ declassignment:
 		$$ = 0;
         symtab_symbol_t* sym = symtabSymbol($name, $type);
 
-        if ( checkExistence($name) ) { yyerror("%s already declared!\n", $name); }
+        if ( blockDepth == 0) { sym->is_global = 1; }
 
-        symtabInsert(tab, sym);
+        if ( symtabInsert(tab, sym) ) { yyerror("%s already declared!\n", $name); }
         symtabPrint(tab, stdout);
 	}
 	| type ID[name] '=' assignment[expr] {
@@ -375,11 +380,11 @@ declassignment:
 		
         $expr = checkType(sym, $expr);
 
-        if ( checkExistence($name) ) { yyerror("%s already declared!\n", $name); }
+        if ( blockDepth == 0) { sym->is_global = 1; }
 
 		$$ = syntreeNodePair(ast, SYNTREE_TAG_Assign, syntreeNodeVariable(ast, sym), $expr);
 
-        symtabInsert(tab, sym);
+        if ( symtabInsert(tab, sym) ) { yyerror("%s already declared!\n", $name); }
         symtabPrint(tab, stdout);
 	}
 	;
