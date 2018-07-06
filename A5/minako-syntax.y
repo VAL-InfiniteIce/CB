@@ -78,6 +78,8 @@
 }
 
 %{
+    #define debugMsgNor //symtabPrint(tab, stdout);
+    #define debugMsgErr symtabPrint(tab, stdout);
     #define true 1
     #define false 0
 
@@ -90,9 +92,9 @@
         bool foundAtLeastOneReturn;
     } currentFunction_t ;
 
+    extern int checkInputValues(syntree_nid lid, syntree_nid rid, char* sign);
     extern int checkType(symtab_symbol_t * self, syntree_nid id);
     extern int insertElement();
-    extern symtab_symbol_t * checkExistence();
 
     currentFunction_t currentFunction;
     unsigned int blockDepth = 0;
@@ -196,7 +198,6 @@ functiondefinition:
         {
 		    yyerror("double declaration of function %s\n.", $name);
         }
-        symtabPrint(tab, stdout);
         /* Just to be save: */
         if (currentFunction.functionHandle != NULL) { fprintf(stderr, "cFH != NULL\n"); exit(-2); }
         currentFunction.functionHandle = func;
@@ -210,6 +211,7 @@ functiondefinition:
     }
     '{' statementlist[body] '}'
     {
+        debugMsgNor
         --blockDepth;
         symtabLeave(tab);
 
@@ -247,7 +249,6 @@ parameter:
         currentFunction.parameter = sym;
 
         if ( symtabInsert(tab, sym) ) { yyerror("2 parameter with the same name: %s already used!\n", $name); }
-        symtabPrint(tab, stdout);
     }
 	;
 
@@ -260,7 +261,6 @@ functioncall:
 		
 		$$ = syntreeNodePair(ast, SYNTREE_TAG_Call, $args, fn->body);
 		nodePtr($$)->type = fn->type;
-        symtabPrint(tab, stdout);
 	}
 	;
 
@@ -292,6 +292,7 @@ block:
     }
 	statementlist[body]
     {
+        debugMsgNor
         symtabLeave(tab);
         --blockDepth;
     }
@@ -312,7 +313,11 @@ statement:
 	;
 
 ifstatement:
-	KW_IF '(' assignment[cond] ')' statement[then] opt_else[else]
+	KW_IF '(' assignment[cond]
+    {
+        if (nodeType($cond) != SYNTREE_TYPE_Boolean) { yyerror("an if-condition must be a boolean expression!\n"); }
+    }
+    ')' statement[then] opt_else[else]
     {
 		$$ = syntreeNodePair(ast, SYNTREE_TAG_If, $cond, $then);
 		$$ = syntreeNodeAppend(ast, $$, $else);
@@ -335,6 +340,7 @@ forstatement:
         ++blockDepth;
     }
     declassignment[init] ';' expr[cond] ';' statassignment[step] ')' statement[body] {
+        debugMsgNor
         symtabLeave(tab);
         --blockDepth;
 		
@@ -348,6 +354,7 @@ forstatement:
         ++blockDepth;
     }
     statassignment[init] ';' expr[cond] ';' statassignment[step] ')' statement[body] {
+        debugMsgNor
         symtabLeave(tab);
         --blockDepth;
 
@@ -365,6 +372,7 @@ dowhilestatement:
     }
     statement[body] KW_WHILE '(' assignment[cond] ')'
     {
+        debugMsgNor
         symtabLeave(tab);
         --blockDepth;
 
@@ -380,6 +388,7 @@ whilestatement:
     }
     '(' assignment[cond] ')' statement[body]
     {
+        debugMsgNor
         symtabLeave(tab);
         --blockDepth;
 		$$ = syntreeNodePair(ast, SYNTREE_TAG_While, $cond, $body);
@@ -427,7 +436,6 @@ declassignment:
         if ( blockDepth == 0) { sym->is_global = 1; }
 
         if ( symtabInsert(tab, sym) ) { yyerror("%s already declared!\n", $name); }
-        symtabPrint(tab, stdout);
 	}
 	| type ID[name] '=' assignment[expr] {
 	    symtab_symbol_t* sym = symtabSymbol($name, $type);
@@ -439,7 +447,6 @@ declassignment:
 		$$ = syntreeNodePair(ast, SYNTREE_TAG_Assign, syntreeNodeVariable(ast, sym), $expr);
 
         if ( symtabInsert(tab, sym) ) { yyerror("%s already declared!\n", $name); }
-        symtabPrint(tab, stdout);
 	}
 	;
 
@@ -452,7 +459,7 @@ type:
 
 statassignment:
 	ID[name] '=' assignment[expr] {
-		symtab_symbol_t* sym = checkExistence($name);
+		symtab_symbol_t* sym = symtabLookup(tab, $name);
 		
         if (!sym) { yyerror("%s is used before declaration!\n", $name); }
 
@@ -466,7 +473,7 @@ statassignment:
 
 assignment:
 	ID[name] '=' assignment[expr] {
-		symtab_symbol_t* sym = checkExistence($name);
+		symtab_symbol_t* sym = symtabLookup(tab, $name);
 		
         if (!sym) { yyerror("%s is used before declaration\n", $name); }
 
@@ -483,42 +490,121 @@ assignment:
 expr:
 	simpexpr
 	| simpexpr[lhs] EQ  simpexpr[rhs]
-		{ $$ = combine($lhs, $rhs, SYNTREE_TAG_Eqt); }
+		{
+            checkInputValues($lhs, $rhs, "==");
+            $$ = combine($lhs, $rhs, SYNTREE_TAG_Eqt);
+            nodePtr($$)->type = SYNTREE_TYPE_Boolean;
+        }
 	| simpexpr[lhs] NEQ simpexpr[rhs]
-		{ $$ = combine($lhs, $rhs, SYNTREE_TAG_Neq); }
+		{
+            checkInputValues($lhs, $rhs, "!=");
+            $$ = combine($lhs, $rhs, SYNTREE_TAG_Neq);
+            nodePtr($$)->type = SYNTREE_TYPE_Boolean;
+        }
 	| simpexpr[lhs] LEQ simpexpr[rhs]
-		{ $$ = combine($lhs, $rhs, SYNTREE_TAG_Leq); }
+		{
+            checkInputValues($lhs, $rhs, "<=");
+            $$ = combine($lhs, $rhs, SYNTREE_TAG_Leq);
+            nodePtr($$)->type = SYNTREE_TYPE_Boolean;
+        }
 	| simpexpr[lhs] GEQ simpexpr[rhs]
-		{ $$ = combine($lhs, $rhs, SYNTREE_TAG_Geq); }
+		{
+            checkInputValues($lhs, $rhs, ">=");
+            $$ = combine($lhs, $rhs, SYNTREE_TAG_Geq);
+            nodePtr($$)->type = SYNTREE_TYPE_Boolean;
+        }
 	| simpexpr[lhs] LSS simpexpr[rhs]
-		{ $$ = combine($lhs, $rhs, SYNTREE_TAG_Lst); }
+		{
+            checkInputValues($lhs, $rhs, "<");
+            $$ = combine($lhs, $rhs, SYNTREE_TAG_Lst);
+            nodePtr($$)->type = SYNTREE_TYPE_Boolean;
+        }
 	| simpexpr[lhs] GRT simpexpr[rhs]
-		{ $$ = combine($lhs, $rhs, SYNTREE_TAG_Grt); }
+		{
+            checkInputValues($lhs, $rhs, ">");
+            $$ = combine($lhs, $rhs, SYNTREE_TAG_Grt);
+            nodePtr($$)->type = SYNTREE_TYPE_Boolean;
+        }
 	;
 
 simpexpr:
 	simpexpr[lhs] '+' simpexpr[rhs]
-		{ $$ = combine($lhs, $rhs, SYNTREE_TAG_Plus); }
+		{
+            checkInputValues($lhs, $rhs, "+");
+            if (nodeType($lhs) == SYNTREE_TYPE_Boolean)
+            {
+                yyerror("type BOOLEAN can't be used with '+' operator!\n");
+            }
+            $$ = combine($lhs, $rhs, SYNTREE_TAG_Plus);
+        }
 	| simpexpr[lhs] '-' simpexpr[rhs]
-		{ $$ = combine($lhs, $rhs, SYNTREE_TAG_Minus); }
+		{
+            checkInputValues($lhs, $rhs, "-");
+            if (nodeType($lhs) == SYNTREE_TYPE_Boolean)
+            {
+                yyerror("type BOOLEAN can't be used with '*' operator!\n");
+            }
+            $$ = combine($lhs, $rhs, SYNTREE_TAG_Minus);
+        }
 	| simpexpr[lhs] OR simpexpr[rhs]
-		{ $$ = combine($lhs, $rhs, SYNTREE_TAG_LogOr); }
+		{
+            checkInputValues($lhs, $rhs, "||");
+            if (nodeType($lhs) != SYNTREE_TYPE_Boolean)
+            {
+                yyerror("Only values of type BOOLEAN can be used with '||' operator!\n");
+            }
+            $$ = combine($lhs, $rhs, SYNTREE_TAG_LogOr);
+            nodePtr($$)->type = SYNTREE_TYPE_Boolean;
+        }
 	| simpexpr[lhs] '*' simpexpr[rhs]
-		{ $$ = combine($lhs, $rhs, SYNTREE_TAG_Times); }
+		{
+            checkInputValues($lhs, $rhs, "*");
+            if (nodeType($lhs) == SYNTREE_TYPE_Boolean)
+            {
+                yyerror("type BOOLEAN can't be used with '*' operator!\n");
+            }
+            $$ = combine($lhs, $rhs, SYNTREE_TAG_Times);
+        }
 	| simpexpr[lhs] '/' simpexpr[rhs]
-		{ $$ = combine($lhs, $rhs, SYNTREE_TAG_Divide); }
+		{
+            checkInputValues($lhs, $rhs, "/");
+            if (nodeType($lhs) == SYNTREE_TYPE_Boolean)
+            {
+                yyerror("type BOOLEAN can't be used with '/' operator!\n");
+            }
+            $$ = combine($lhs, $rhs, SYNTREE_TAG_Divide);
+        }
 	| simpexpr[lhs] AND simpexpr[rhs]
-		{ $$ = combine($lhs, $rhs, SYNTREE_TAG_LogAnd); }
-	| '-' simpexpr[operand] %prec UMINUS {
-		$$ = syntreeNodeTag(ast, SYNTREE_TAG_Uminus, $operand);
-		nodePtr($$)->type = nodeType($operand);
-	}
+		{
+            checkInputValues($lhs, $rhs, "&&");
+            if (nodeType($lhs) != SYNTREE_TYPE_Boolean)
+            {
+                yyerror("Only values of type BOOLEAN can be used with '&&' operator!\n");
+            }
+            $$ = combine($lhs, $rhs, SYNTREE_TAG_LogAnd);
+            nodePtr($$)->type = SYNTREE_TYPE_Boolean;
+        }
+	| '-' simpexpr[operand] %prec UMINUS
+        {
+            if (nodeType($operand) == SYNTREE_TYPE_Boolean)
+            {
+                yyerror("can't negate type BOOLEAN!\n");
+            }
+	    	$$ = syntreeNodeTag(ast, SYNTREE_TAG_Uminus, $operand);
+	    	nodePtr($$)->type = nodeType($operand);
+	    }
 	| CONST_INT[val]
-		{ $$ = syntreeNodeInteger(ast, $val); }
+		{
+            $$ = syntreeNodeInteger(ast, $val);
+        }
 	| CONST_FLOAT[val]
-		{ $$ = syntreeNodeFloat(ast, $val); }
+		{
+            $$ = syntreeNodeFloat(ast, $val);
+        }
 	| CONST_BOOLEAN[val]
-		{ $$ = syntreeNodeBoolean(ast, $val); }
+		{
+            $$ = syntreeNodeBoolean(ast, $val);
+        }
 	| functioncall
 	| ID[name] {
 		symtab_symbol_t* sym = symtabLookup(tab, $name);
@@ -564,7 +650,6 @@ int main(int argc, const char* argv[])
 	/* parse das Programm */
 	yydebug = 0;
 	rc = yyparse();
-	printf("Result of test: %i\n", rc);
 	/* gib' Symboltabelle und Syntaxbaum wieder frei */
 	symtabRelease(&symtab);
 	syntreeRelease(&syntree);
@@ -572,22 +657,16 @@ int main(int argc, const char* argv[])
 	return rc;
 }
 
+int checkInputValues(syntree_nid lid, syntree_nid rid, char* sign)
+{
+    if (nodeType(lid) == nodeType(rid)) { return 0; }
+    yyerror("can't use for '%s' %i and %i!\n", sign, nodeType(lid), nodeType(rid));
+    return 1;
+}
+
 int insertElement()
 {
     return 0;
-}
-
-symtab_symbol_t *checkExistence(const char *name)
-{
-    symtab_symbol_t* other = symtabLookup(tab, name);
-    if (! other)
-    {
-        printf("%s is a new one!\n", name);
-        return 0;
-    } else {
-        printf("%s is already defined!\n", name);
-        return other;
-    }
 }
 
 int checkType(symtab_symbol_t *self, syntree_nid id)
@@ -602,6 +681,7 @@ int checkType(symtab_symbol_t *self, syntree_nid id)
     }
     return id;
 }
+
 /**@brief Gibt eine Fehlermeldung aus und beendet das Programm mit Exitcode -1.
  * Die Funktion akzeptiert eine variable Argumentliste und nutzt die Syntax von
  * printf.
@@ -610,6 +690,7 @@ int checkType(symtab_symbol_t *self, syntree_nid id)
  */
 void yyerror(const char* msg, ...)
 {
+    debugMsgErr
 	va_list args;
 	
 	va_start(args, msg);
