@@ -86,6 +86,8 @@
     typedef struct currentFunction_s {
         symtab_symbol_t * functionHandle; // = NULL;
         symtab_symbol_t * parameter; // = NULL;
+
+        bool foundAtLeastOneReturn;
     } currentFunction_t ;
 
     extern int checkType(symtab_symbol_t * self, syntree_nid id);
@@ -199,6 +201,7 @@ functiondefinition:
         if (currentFunction.functionHandle != NULL) { fprintf(stderr, "cFH != NULL\n"); exit(-2); }
         currentFunction.functionHandle = func;
         currentFunction.parameter = func;
+        currentFunction.foundAtLeastOneReturn = false;
         symtabEnter(tab);
         ++blockDepth;
 	}
@@ -209,6 +212,12 @@ functiondefinition:
     {
         --blockDepth;
         symtabLeave(tab);
+
+        if (currentFunction.functionHandle->type != SYNTREE_TYPE_Void
+                && !currentFunction.foundAtLeastOneReturn)
+        {
+            yyerror("a non-void function need a 'return' statement!\n");
+        }
         currentFunction.parameter = NULL;
         currentFunction.functionHandle = NULL;
 
@@ -303,7 +312,8 @@ statement:
 	;
 
 ifstatement:
-	KW_IF '(' assignment[cond] ')' statement[then] opt_else[else] {
+	KW_IF '(' assignment[cond] ')' statement[then] opt_else[else]
+    {
 		$$ = syntreeNodePair(ast, SYNTREE_TAG_If, $cond, $then);
 		$$ = syntreeNodeAppend(ast, $$, $else);
 	}
@@ -384,6 +394,8 @@ returnstatement:
         {
             yyerror("no void return type of a non-void function allowed!\n");
         }
+        currentFunction.foundAtLeastOneReturn = true;
+
 		$$ = syntreeNodeEmpty(ast, SYNTREE_TAG_Return);
 	}
 	| KW_RETURN assignment[expr] {
@@ -392,6 +404,7 @@ returnstatement:
         {
             yyerror("returning a non-void value in a void function is not allowed!\n");
         }
+        currentFunction.foundAtLeastOneReturn = true;
 
         $expr = checkType(currentFunction.functionHandle, $expr);
 
