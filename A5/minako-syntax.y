@@ -78,12 +78,20 @@
 }
 
 %{
-    extern int checkType(symtab_symbol_t * self, unsigned int toCompare);
+    #define true 1
+    #define false 0
+
+    typedef unsigned int bool;
+
+    typedef struct currentFunction_s {
+        symtab_symbol_t * functionHandle; // = NULL;
+        symtab_symbol_t * parameter; // = NULL;
+    } currentFunction_t ;
+
+    currentFunction_t currentFunction;
+    extern int checkType(symtab_symbol_t * self, syntree_nid id);
     extern int insertElement();
     extern symtab_symbol_t * checkExistence();
-
-    symtab_symbol_t * currentFunctionHandle = NULL;
-    symtab_symbol_t * currentParameter = NULL;
 %}
 
 %printer { fprintf(yyoutput, "\"%s\"", $$); } <string>
@@ -154,7 +162,7 @@
 start:
 	program {
 		symtab_symbol_t* entry = symtabLookup(tab, "main");
-        if (! entry) { yyerror("a 'void main()' must bedeclared\n"); }
+        if (! entry) { yyerror("a 'void main()' must be declared\n"); }
         if (entry->type != SYNTREE_TYPE_Void) { yyerror("the 'main()' must be of type void!\n"); }
         if (entry->par_next != NULL) { yyerror("there are no parameters for 'void main()' allowed!\n"); }
 
@@ -186,18 +194,19 @@ functiondefinition:
         }
         symtabPrint(tab, stdout);
         /* Just to be save: */
-        if (currentFunctionHandle != NULL) { fprintf(stderr, "cFH != NULL\n"); exit(-2); }
-        currentFunctionHandle = func;
-        currentParameter = func;
+        if (currentFunction.functionHandle != NULL) { fprintf(stderr, "cFH != NULL\n"); exit(-2); }
+        currentFunction.functionHandle = func;
+        currentFunction.parameter = func;
 
 	}
 	'(' opt_parameterlist ')'
     {
-        currentParameter = NULL;
-        currentFunctionHandle = NULL;
     }
     '{' statementlist[body] '}'
     {
+        currentFunction.parameter = NULL;
+        currentFunction.functionHandle = NULL;
+
 		syntreeNodeAppend(ast, func->body, $body);
 		nodeValue(func->body)->function.locals = symtabMaxLocals(tab);
 	}
@@ -214,13 +223,14 @@ parameterlist:
 	;
 
 parameter:
-	type[type] ID[name]
+	type ID[name]
     {
         symtab_symbol_t* sym = symtabSymbol($name, $type);
+        sym->is_param = 1;
 
         // TODO check double delcaration in parameters
-        currentParameter->par_next = sym;
-        currentParameter = sym;
+        currentFunction.parameter->par_next = sym;
+        currentFunction.parameter = sym;
 
         symtabInsert(tab, sym);
         symtabPrint(tab, stdout);
@@ -321,13 +331,24 @@ whilestatement:
 	;
 
 returnstatement:
-	KW_RETURN {
+	KW_RETURN
+    {
+        if (currentFunction.functionHandle == NULL) { yyerror("no function to return from!\n"); }
+        if (currentFunction.functionHandle->type != SYNTREE_TYPE_Void)
+        {
+            yyerror("no void return type of a non-void function allowed!\n");
+        }
 		$$ = syntreeNodeEmpty(ast, SYNTREE_TAG_Return);
 	}
 	| KW_RETURN assignment[expr] {
-		if (func->type != nodeType($expr))
-			$expr = syntreeNodeCast(ast, func->type, $expr);
-		
+        if (currentFunction.functionHandle == NULL) { yyerror("no function to return from!\n"); }
+        if (currentFunction.functionHandle->type == SYNTREE_TYPE_Void)
+        {
+            yyerror("returning a non-void value in a void function is not allowed!\n");
+        }
+
+        $expr = checkType(currentFunction.functionHandle, $expr);
+
 		$$ = syntreeNodeTag(ast, SYNTREE_TAG_Return, $expr);
 	}
 	;
@@ -510,16 +531,17 @@ symtab_symbol_t *checkExistence(const char *name)
     }
 }
 
-int checkType(symtab_symbol_t *self, unsigned int toCompare)
+int checkType(symtab_symbol_t *self, syntree_nid id)
 {
-	if (self->type != nodeType(toCompare))
+    // TODO: A closer look is necessary
+	if (self->type != nodeType(id))
     {
-		toCompare = syntreeNodeCast(ast, self->type, toCompare);
+        printf("Expr has %i as value\n", nodeType(id));
         // TODO : int to float cast is legit
-        printf("Expr has %i as value\n", toCompare);
-        yyerror("can't cast %i to %i!", toCompare, self->type);
+        yyerror("can't cast %i to %i!\n", nodeType(id), self->type);
+		id = syntreeNodeCast(ast, self->type, id);
     }
-    return toCompare;
+    return id;
 }
 /**@brief Gibt eine Fehlermeldung aus und beendet das Programm mit Exitcode -1.
  * Die Funktion akzeptiert eine variable Argumentliste und nutzt die Syntax von
