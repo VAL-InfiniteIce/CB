@@ -277,7 +277,15 @@ statementlist:
 
 block:
 	'{'
-		statementlist[body]
+    {
+        symtabEnter(tab);
+        ++blockDepth;
+    }
+	statementlist[body]
+    {
+        symtabLeave(tab);
+        --blockDepth;
+    }
 	'}' { $$ = $body; }
 	;
 
@@ -311,12 +319,28 @@ opt_else:
 	;
 
 forstatement:
-	KW_FOR '(' declassignment[init] ';' expr[cond] ';' statassignment[step] ')' statement[body] {
-		$$ = syntreeNodePair(ast, SYNTREE_TAG_For, $init, $cond);
+	KW_FOR '(' 
+    {
+        symtabEnter(tab);
+        ++blockDepth;
+    }
+    declassignment[init] ';' expr[cond] ';' statassignment[step] ')' statement[body] {
+        symtabLeave(tab);
+        --blockDepth;
+		
+        $$ = syntreeNodePair(ast, SYNTREE_TAG_For, $init, $cond);
 		$$ = syntreeNodeAppend(ast, $$, $step);
 		$$ = syntreeNodeAppend(ast, $$, $body);
 	}
-	| KW_FOR '(' statassignment[init] ';' expr[cond] ';' statassignment[step] ')' statement[body] {
+	| KW_FOR '('
+    {
+        symtabEnter(tab);
+        ++blockDepth;
+    }
+    statassignment[init] ';' expr[cond] ';' statassignment[step] ')' statement[body] {
+        symtabLeave(tab);
+        --blockDepth;
+
 		$$ = syntreeNodePair(ast, SYNTREE_TAG_For, $init, $cond);
 		$$ = syntreeNodeAppend(ast, $$, $step);
 		$$ = syntreeNodeAppend(ast, $$, $body);
@@ -324,13 +348,30 @@ forstatement:
 	;
 
 dowhilestatement:
-	KW_DO statement[body] KW_WHILE '(' assignment[cond] ')' {
+	KW_DO
+    {
+        symtabEnter(tab);
+        ++blockDepth;
+    }
+    statement[body] KW_WHILE '(' assignment[cond] ')'
+    {
+        symtabLeave(tab);
+        --blockDepth;
+
 		$$ = syntreeNodePair(ast, SYNTREE_TAG_DoWhile, $cond, $body);
 	}
 	;
 
 whilestatement:
-	KW_WHILE '(' assignment[cond] ')' statement[body] {
+	KW_WHILE
+    {
+        symtabEnter(tab);
+        ++blockDepth;
+    }
+    '(' assignment[cond] ')' statement[body]
+    {
+        symtabLeave(tab);
+        --blockDepth;
 		$$ = syntreeNodePair(ast, SYNTREE_TAG_While, $cond, $body);
 	}
 	;
