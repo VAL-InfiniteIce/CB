@@ -429,19 +429,64 @@ execPlus(const syntree_node_t* node)
 static void
 execMinus(const syntree_node_t* node)
 {
-	/* TODO: Implementation */
+	minako_value_t lhs = dispatch(nodeFirst(node));
+	minako_value_t rhs = dispatch(nodeLast(node));
+	
+	switch (node->type)
+	{
+	case SYNTREE_TYPE_Integer:
+		vm->eax.value.integer = lhs.value.integer - rhs.value.integer;
+		break;
+		
+	case SYNTREE_TYPE_Float:
+		vm->eax.value.real = lhs.value.real - rhs.value.real;
+		break;
+		
+	default:
+		assert(!"unexpected type in operation");
+	}
 }
 
 static void
 execTimes(const syntree_node_t* node)
 {
-	/* TODO: Implementation */
+	minako_value_t lhs = dispatch(nodeFirst(node));
+	minako_value_t rhs = dispatch(nodeLast(node));
+	
+	switch (node->type)
+	{
+	case SYNTREE_TYPE_Integer:
+		vm->eax.value.integer = lhs.value.integer * rhs.value.integer;
+		break;
+		
+	case SYNTREE_TYPE_Float:
+		vm->eax.value.real = lhs.value.real * rhs.value.real;
+		break;
+		
+	default:
+		assert(!"unexpected type in operation");
+	}
 }
 
 static void
 execDivide(const syntree_node_t* node)
 {
-	/* TODO: Implementation */
+	minako_value_t lhs = dispatch(nodeFirst(node));
+	minako_value_t rhs = dispatch(nodeLast(node));
+
+	switch (node->type)
+	{
+	case SYNTREE_TYPE_Integer:
+		vm->eax.value.integer = lhs.value.integer / rhs.value.integer;
+		break;
+		
+	case SYNTREE_TYPE_Float:
+		vm->eax.value.real = lhs.value.real / rhs.value.real;
+		break;
+		
+	default:
+		assert(!"unexpected type in operation");
+	}
 }
 
 static void
@@ -454,31 +499,58 @@ execLogOr(const syntree_node_t* node)
 static void
 execLogAnd(const syntree_node_t* node)
 {
-	/* TODO: Implementation */
+	(void) (dispatch(nodeFirst(node)).value.boolean
+	&& dispatch(nodeLast(node)).value.boolean);
 }
 
 static void
 execUminus(const syntree_node_t* node)
 {
-	/* TODO: Implementation */
+	minako_value_t operand = dispatch(nodeFirst(node));
+
+	switch (node->type)
+	{
+	case SYNTREE_TYPE_Integer:
+		vm->eax.value.integer = -operand.value.integer;
+		break;
+		
+	case SYNTREE_TYPE_Float:
+		vm->eax.value.real = -operand.value.real;
+		break;
+		
+	default:
+		assert(!"unexpected type in operation");
+	}
 }
 
 static void
 execEqt(const syntree_node_t* node)
 {
+	minako_value_t lhs = dispatch(nodeFirst(node));
+	minako_value_t rhs = dispatch(nodeLast(node));
+
 	vm->eax.type = SYNTREE_TYPE_Boolean;
 	switch (nodeFirst(node)->type)
 	{
 	case SYNTREE_TYPE_Boolean:
-		/* TODO: Implementation */
+        if (lhs.value.boolean == rhs.value.boolean)
+            { vm->eax.value.boolean = 1; }
+        else
+            { vm->eax.value.boolean = 0; }
 		break;
 		
 	case SYNTREE_TYPE_Integer:
-		/* TODO: Implementation */
+        if (lhs.value.integer == rhs.value.integer)
+            { vm->eax.value.boolean = 1; }
+        else
+            { vm->eax.value.boolean = 0; }
 		break;
 		
 	case SYNTREE_TYPE_Float:
-		/* TODO: Implementation */
+        if (lhs.value.real == rhs.value.real)
+            { vm->eax.value.boolean = 1; }
+        else
+            { vm->eax.value.boolean = 0; }
 		break;
 		
 	default:
@@ -489,31 +561,148 @@ execEqt(const syntree_node_t* node)
 static void
 execNeq(const syntree_node_t* node)
 {
-	/* TODO: Implementation */
+	minako_value_t lhs = dispatch(nodeFirst(node));
+	minako_value_t rhs = dispatch(nodeLast(node));
+
+	vm->eax.type = SYNTREE_TYPE_Boolean;
+	switch (nodeFirst(node)->type)
+	{
+	case SYNTREE_TYPE_Boolean:
+        if (lhs.value.boolean != rhs.value.boolean)
+            { vm->eax.value.boolean = 1; }
+        else
+            { vm->eax.value.boolean = 0; }
+		break;
+		
+	case SYNTREE_TYPE_Integer:
+        if (lhs.value.integer != rhs.value.integer)
+            { vm->eax.value.boolean = 1; }
+        else
+            { vm->eax.value.boolean = 0; }
+		break;
+		
+	case SYNTREE_TYPE_Float:
+        if (lhs.value.real != rhs.value.real)
+            { vm->eax.value.boolean = 1; }
+        else
+            { vm->eax.value.boolean = 0; }
+		break;
+		
+	default:
+		assert(!"unexpected type in operation");
+	}
 }
 
 static void
 execLeq(const syntree_node_t* node)
 {
-	/* TODO: Implementation */
+	minako_value_t lhs = dispatch(nodeFirst(node));
+	minako_value_t rhs = dispatch(nodeLast(node));
+    
+	vm->eax.type = SYNTREE_TYPE_Boolean;
+	switch (nodeFirst(node)->type)
+	{
+	case SYNTREE_TYPE_Integer:
+        if (lhs.value.integer <= rhs.value.integer)
+            { vm->eax.value.boolean = 1; }
+        else
+            { vm->eax.value.boolean = 0; }
+		break;
+		
+	case SYNTREE_TYPE_Float:
+        if (lhs.value.real <= rhs.value.real)
+            { vm->eax.value.boolean = 1; }
+        else
+            { vm->eax.value.boolean = 0; }
+		break;
+		
+	default:
+		assert(!"unexpected type in operation");
+	}
 }
 
 static void
 execGeq(const syntree_node_t* node)
 {
-	/* TODO: Implementation */
+	minako_value_t lhs = dispatch(nodeFirst(node));
+	minako_value_t rhs = dispatch(nodeLast(node));
+    
+	vm->eax.type = SYNTREE_TYPE_Boolean;
+	switch (nodeFirst(node)->type)
+	{
+	case SYNTREE_TYPE_Integer:
+        if (lhs.value.integer >= rhs.value.integer)
+            { vm->eax.value.boolean = 1; }
+        else
+            { vm->eax.value.boolean = 0; }
+		break;
+		
+	case SYNTREE_TYPE_Float:
+        if (lhs.value.real >= rhs.value.real)
+            { vm->eax.value.boolean = 1; }
+        else
+            { vm->eax.value.boolean = 0; }
+		break;
+		
+	default:
+		assert(!"unexpected type in operation");
+	}
 }
 
 static void
 execLst(const syntree_node_t* node)
 {
-	/* TODO: Implementation */
+	minako_value_t lhs = dispatch(nodeFirst(node));
+	minako_value_t rhs = dispatch(nodeLast(node));
+    
+	vm->eax.type = SYNTREE_TYPE_Boolean;
+	switch (nodeFirst(node)->type)
+	{
+	case SYNTREE_TYPE_Integer:
+        if (lhs.value.integer < rhs.value.integer)
+            { vm->eax.value.boolean = 1; }
+        else
+            { vm->eax.value.boolean = 0; }
+		break;
+		
+	case SYNTREE_TYPE_Float:
+        if (lhs.value.real < rhs.value.real)
+            { vm->eax.value.boolean = 1; }
+        else
+            { vm->eax.value.boolean = 0; }
+		break;
+		
+	default:
+		assert(!"unexpected type in operation");
+	}
 }
 
 static void
 execGrt(const syntree_node_t* node)
 {
-	/* TODO: Implementation */
+	minako_value_t lhs = dispatch(nodeFirst(node));
+	minako_value_t rhs = dispatch(nodeLast(node));
+    
+	vm->eax.type = SYNTREE_TYPE_Boolean;
+	switch (nodeFirst(node)->type)
+	{
+	case SYNTREE_TYPE_Integer:
+        if (lhs.value.integer > rhs.value.integer)
+            { vm->eax.value.boolean = 1; }
+        else
+            { vm->eax.value.boolean = 0; }
+		break;
+		
+	case SYNTREE_TYPE_Float:
+        if (lhs.value.real > rhs.value.real)
+            { vm->eax.value.boolean = 1; }
+        else
+            { vm->eax.value.boolean = 0; }
+		break;
+		
+	default:
+		assert(!"unexpected type in operation");
+	}
 }
 
 /* *************************************************************** driver *** */
