@@ -86,6 +86,8 @@
     typedef unsigned int bool;
 
     typedef struct currentFunction_s {
+        void * prevCall;
+
         symtab_symbol_t * functionHandle; // = NULL;
         symtab_symbol_t * parameter; // = NULL;
 
@@ -96,7 +98,7 @@
     extern int checkType(symtab_symbol_t * self, syntree_nid id);
     extern int insertElement();
 
-    currentFunction_t currentFunction;
+    currentFunction_t *currentFunction;
     unsigned int blockDepth = 0;
 %}
 
@@ -199,10 +201,15 @@ functiondefinition:
 		    yyerror("double declaration of function %s\n.", $name);
         }
         /* Just to be save: */
-        if (currentFunction.functionHandle != NULL) { fprintf(stderr, "cFH != NULL\n"); exit(-2); }
-        currentFunction.functionHandle = func;
-        currentFunction.parameter = func;
-        currentFunction.foundAtLeastOneReturn = false;
+        if (currentFunction != NULL) { fprintf(stderr, "cFH != NULL\n"); exit(-2); }
+
+        currentFunction_t newStruct;
+        currentFunction = &newStruct;
+
+        currentFunction->functionHandle = func;
+        currentFunction->parameter = func;
+        currentFunction->foundAtLeastOneReturn = false;
+
         symtabEnter(tab);
         ++blockDepth;
 	}
@@ -215,13 +222,13 @@ functiondefinition:
         --blockDepth;
         symtabLeave(tab);
 
-        if (currentFunction.functionHandle->type != SYNTREE_TYPE_Void
-                && !currentFunction.foundAtLeastOneReturn)
+        if (currentFunction->functionHandle->type != SYNTREE_TYPE_Void
+                && !currentFunction->foundAtLeastOneReturn)
         {
             yyerror("a non-void function need a 'return' statement!\n");
         }
-        currentFunction.parameter = NULL;
-        currentFunction.functionHandle = NULL;
+        currentFunction->parameter = NULL;
+        currentFunction = NULL;
 
 		syntreeNodeAppend(ast, func->body, $body);
 		nodeValue(func->body)->function.locals = symtabMaxLocals(tab);
@@ -245,36 +252,83 @@ parameter:
         sym->is_param = 1;
 
         // TODO check double delcaration in parameters
-        currentFunction.parameter->par_next = sym;
-        currentFunction.parameter = sym;
+        currentFunction->parameter->par_next = sym;
+        currentFunction->parameter = sym;
 
         if ( symtabInsert(tab, sym) ) { yyerror("2 parameter with the same name: %s already used!\n", $name); }
     }
 	;
 
 functioncall:
-	ID[name] '(' opt_argumentlist[args] ')' {
-		symtab_symbol_t* fn = symtabLookup(tab, $name);
-		
+	ID[name] '('
+    {
+        currentFunction_t *newPointer = malloc(sizeof(currentFunction_t));
+        if (!newPointer) { fprintf(stderr, "Out-of-memory error!\n"); }
+        
+        newPointer->prevCall = (currentFunction_t*) currentFunction;
+        currentFunction = newPointer;
+
+        currentFunction->functionHandle = symtabLookup(tab, $name);
+        currentFunction->parameter = currentFunction->functionHandle->par_next;
+
+        currentFunction->foundAtLeastOneReturn = false;
+
+    }
+    opt_argumentlist[args] ')'
+    {
+		symtab_symbol_t* fn = currentFunction->functionHandle;
+        
+
 		if (fn == NULL)
 			yyerror("unknown symbol '%s'", $name);
 		
 		$$ = syntreeNodePair(ast, SYNTREE_TAG_Call, $args, fn->body);
 		nodePtr($$)->type = fn->type;
+
+        currentFunction_t *newPointer = currentFunction;
+        currentFunction = newPointer->prevCall;
+        free(newPointer);
 	}
 	;
 
 opt_argumentlist:
 	/* empty */
-		{ $$ = syntreeNodeEmpty(ast, SYNTREE_TAG_Sequence); }
+		{
+            if (currentFunction->parameter != NULL)
+            {
+                yyerror("%s needs more than 0 arguments!\n", currentFunction->functionHandle->name);
+            }
+            $$ = syntreeNodeEmpty(ast, SYNTREE_TAG_Sequence);
+        }
 	| argumentlist
+        {
+            if (currentFunction->functionHandle->par_next == NULL)
+            {
+                yyerror("%s has no arguments!\n", currentFunction->functionHandle->name);
+            }
+            currentFunction->functionHandle = currentFunction->functionHandle->par_next;
+        }
 	;
 
 argumentlist:
 	assignment[expr]
-		{ $$ = syntreeNodeTag(ast, SYNTREE_TAG_Sequence, $expr); }
+		{   
+            if (nodeType($expr) != currentFunction->parameter->type)
+            {
+                yyerror("%i expected in %s, but %i found!\n", currentFunction->parameter->type, currentFunction->functionHandle->name, nodeType($expr));
+            }
+            currentFunction->parameter = currentFunction->parameter->par_next;
+            $$ = syntreeNodeTag(ast, SYNTREE_TAG_Sequence, $expr);
+        }
 	| argumentlist[list] ',' assignment[elem]
-		{ $$ = syntreeNodeAppend(ast, $list, $elem); }
+        {
+            if (nodeType($elem) != currentFunction->parameter->type)
+            {
+                yyerror("%i expected in %s, but %i found!\n", currentFunction->parameter->type, currentFunction->functionHandle->name, nodeType($elem));
+            }
+            currentFunction->parameter = currentFunction->parameter->par_next;
+		    $$ = syntreeNodeAppend(ast, $list, $elem);
+        }
 	;
 
 statementlist:
@@ -398,24 +452,24 @@ whilestatement:
 returnstatement:
 	KW_RETURN
     {
-        if (currentFunction.functionHandle == NULL) { yyerror("no function to return from!\n"); }
-        if (currentFunction.functionHandle->type != SYNTREE_TYPE_Void)
+        if (currentFunction == NULL) { yyerror("no function to return from!\n"); }
+        if (currentFunction->functionHandle->type != SYNTREE_TYPE_Void)
         {
             yyerror("no void return type of a non-void function allowed!\n");
         }
-        currentFunction.foundAtLeastOneReturn = true;
+        currentFunction->foundAtLeastOneReturn = true;
 
 		$$ = syntreeNodeEmpty(ast, SYNTREE_TAG_Return);
 	}
 	| KW_RETURN assignment[expr] {
-        if (currentFunction.functionHandle == NULL) { yyerror("no function to return from!\n"); }
-        if (currentFunction.functionHandle->type == SYNTREE_TYPE_Void)
+        if (currentFunction == NULL) { yyerror("no function to return from!\n"); }
+        if (currentFunction->functionHandle->type == SYNTREE_TYPE_Void)
         {
             yyerror("returning a non-void value in a void function is not allowed!\n");
         }
-        currentFunction.foundAtLeastOneReturn = true;
+        currentFunction->foundAtLeastOneReturn = true;
 
-        $expr = checkType(currentFunction.functionHandle, $expr);
+        $expr = checkType(currentFunction->functionHandle, $expr);
 
 		$$ = syntreeNodeTag(ast, SYNTREE_TAG_Return, $expr);
 	}
@@ -608,7 +662,7 @@ simpexpr:
 	| functioncall
 	| ID[name] {
 		symtab_symbol_t* sym = symtabLookup(tab, $name);
-
+        if (sym == NULL) { yyerror("unknown symbol '%s'", $name); }
 		$$ = syntreeNodeVariable(ast, sym);
 	}
 	| '(' assignment ')'
@@ -674,7 +728,6 @@ int checkType(symtab_symbol_t *self, syntree_nid id)
     // TODO: A closer look is necessary
 	if (self->type != nodeType(id))
     {
-        printf("Expr has %i as value\n", nodeType(id));
         // TODO : int to float cast is legit
         yyerror("can't cast %i to %i!\n", nodeType(id), self->type);
 		id = syntreeNodeCast(ast, self->type, id);
