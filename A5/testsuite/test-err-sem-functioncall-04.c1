@@ -1,0 +1,10 @@
+// Testprogramm aus Testsuite
+
+float test(int a, int b) {
+	return a + b;
+}
+
+void main() {
+	int a = 1;
+	printf(test(true,a));
+}

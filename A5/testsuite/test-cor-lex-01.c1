@@ -1,0 +1,9 @@
+// Einzeilenkommentar
+
+/* Mehrzeilenkommentar
+ * mit Ende
+ */
+
+void main() {
+	printf(1);
+}

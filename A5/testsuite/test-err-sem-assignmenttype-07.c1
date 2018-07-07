@@ -1,0 +1,12 @@
+// Testprogramm aus Testsuite
+
+int test(int a, int b) {
+	bool b = a;
+	return a + b;
+}
+
+void main() {
+	bool a = 1;
+	int b = 2;
+	printf(a + b);
+}

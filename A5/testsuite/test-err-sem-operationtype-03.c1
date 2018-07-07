@@ -1,0 +1,21 @@
+// Testprogramm aus Testsuite
+
+float test(int x, int y) {
+	int a = 1;
+	int b = 2;
+	float c = 3.5;
+	float d = 4.5;
+	bool e = true;
+	bool f = false;
+
+	c = a + b * c / (d * a) - (a/d);
+	d = a = c;
+
+	return a + b;
+}
+
+void main() {
+	int a = 1;
+	int b = 2;
+	printf(test(a,b));
+}

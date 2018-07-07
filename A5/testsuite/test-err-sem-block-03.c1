@@ -1,0 +1,12 @@
+// Testprogramm aus Testsuite
+// Problem mit einelementigen Statements in for/if/while/dowhile
+
+void main() {
+	int a = 0;
+	int b = 1;
+	do
+		int d;
+	while (a<5);
+
+	d = 42; // sollte Fehlerfall sein
+}

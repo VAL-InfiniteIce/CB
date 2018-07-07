@@ -1,0 +1,11 @@
+// Testprogramm aus Testsuite
+
+int test(int a, void b) {
+	return 5;
+}
+
+void main() {
+	void a;
+	int b = 2;
+	test(b, a);
+}
