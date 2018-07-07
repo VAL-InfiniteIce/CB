@@ -1,0 +1,744 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.3.1"/>
+<title>Minako: symtab.h-Dateireferenz</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="minako.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Minako
+   </div>
+   <div id="projectbrief">Dokumentation des studentischen Programminterpreters &quot;Minako&quot;.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Erzeugt von Doxygen 1.8.3.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Suchen" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Auflistung&#160;der&#160;Dateien</span></a></li>
+      <li><a href="globals.html"><span>Datei-Elemente</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Alle</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Datenstrukturen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Dateien</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funktionen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variablen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typdefinitionen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Aufzählungen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Makrodefinitionen</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Datenstrukturen</a> &#124;
+<a href="#func-members">Funktionen</a>  </div>
+  <div class="headertitle">
+<div class="title">symtab.h-Dateireferenz</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Enthält eine Datenstruktur für die Verwaltung von Symbolen in einer Tabelle mit geschichteten Sichtbarkeitsbereichen.  
+<a href="#details">Mehr ...</a></p>
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br/>
+<code>#include &quot;<a class="el" href="syntree_8h_source.html">syntree.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="stack_8h_source.html">stack.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="dict_8h_source.html">dict.h</a>&quot;</code><br/>
+</div><div class="textblock"><div class="dynheader">
+Include-Abhängigkeitsdiagramm für symtab.h:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="symtab_8h__incl.svg" width="280" height="195"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div><div class="textblock"><div class="dynheader">
+Dieser Graph zeigt, welche Datei direkt oder indirekt diese Datei enthält:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="symtab_8h__dep__incl.svg" width="283" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+<p><a href="symtab_8h_source.html">gehe zum Quellcode dieser Datei</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Datenstrukturen</h2></td></tr>
+<tr class="memitem:structsymtab__symbol__t"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symtab_8h.html#structsymtab__symbol__t">symtab_symbol_t</a></td></tr>
+<tr class="memdesc:structsymtab__symbol__t"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struktur eines Symbols in der Symboltabelle.  <a href="symtab_8h.html#structsymtab__symbol__t">Mehr ...</a><br/></td></tr>
+<tr class="separator:structsymtab__symbol__t"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:structsymtab__t"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symtab_8h.html#structsymtab__t">symtab_t</a></td></tr>
+<tr class="memdesc:structsymtab__t"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struktur der Symboltabelle.  <a href="symtab_8h.html#structsymtab__t">Mehr ...</a><br/></td></tr>
+<tr class="separator:structsymtab__t"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funktionen</h2></td></tr>
+<tr class="memitem:ad68de968895824dd7c346389f2a5b4fb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symtab_8h.html#ad68de968895824dd7c346389f2a5b4fb">symtabInit</a> (<a class="el" href="symtab_8h.html#structsymtab__t">symtab_t</a> *self)</td></tr>
+<tr class="memdesc:ad68de968895824dd7c346389f2a5b4fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialisiert eine neue Symboltabelle.  <a href="#ad68de968895824dd7c346389f2a5b4fb">Mehr ...</a><br/></td></tr>
+<tr class="separator:ad68de968895824dd7c346389f2a5b4fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a786d1742a4f3e7f3b17e77e66aa8f42d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symtab_8h.html#a786d1742a4f3e7f3b17e77e66aa8f42d">symtabRelease</a> (<a class="el" href="symtab_8h.html#structsymtab__t">symtab_t</a> *self)</td></tr>
+<tr class="memdesc:a786d1742a4f3e7f3b17e77e66aa8f42d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gibt eine Symboltabelle und alle darin enthaltenen Symbole frei.  <a href="#a786d1742a4f3e7f3b17e77e66aa8f42d">Mehr ...</a><br/></td></tr>
+<tr class="separator:a786d1742a4f3e7f3b17e77e66aa8f42d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0bb9d863a33cb62ca7217f84e40cc50"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symtab_8h.html#ad0bb9d863a33cb62ca7217f84e40cc50">symtabEnter</a> (<a class="el" href="symtab_8h.html#structsymtab__t">symtab_t</a> *self)</td></tr>
+<tr class="memdesc:ad0bb9d863a33cb62ca7217f84e40cc50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Öffnet einen neuen Sichtbarkeitsbereich.  <a href="#ad0bb9d863a33cb62ca7217f84e40cc50">Mehr ...</a><br/></td></tr>
+<tr class="separator:ad0bb9d863a33cb62ca7217f84e40cc50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e0a472001616d30c1be096bac56773b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symtab_8h.html#a4e0a472001616d30c1be096bac56773b">symtabLeave</a> (<a class="el" href="symtab_8h.html#structsymtab__t">symtab_t</a> *self)</td></tr>
+<tr class="memdesc:a4e0a472001616d30c1be096bac56773b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Schließt den Sichtbarkeitsbereich, räumt alle Variablen ab und stellt den Zustand vor der Öffnung des Blocks wieder her.  <a href="#a4e0a472001616d30c1be096bac56773b">Mehr ...</a><br/></td></tr>
+<tr class="separator:a4e0a472001616d30c1be096bac56773b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d61f8a97ef38ccf30b38d8d2205602b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symtab_8h.html#a0d61f8a97ef38ccf30b38d8d2205602b">symtabInsert</a> (<a class="el" href="symtab_8h.html#structsymtab__t">symtab_t</a> *self, <a class="el" href="symtab_8h.html#structsymtab__symbol__t">symtab_symbol_t</a> *sym)</td></tr>
+<tr class="memdesc:a0d61f8a97ef38ccf30b38d8d2205602b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deklariert ein neues Symbol im aktuellen Sichtbarkeitsbereich.  <a href="#a0d61f8a97ef38ccf30b38d8d2205602b">Mehr ...</a><br/></td></tr>
+<tr class="separator:a0d61f8a97ef38ccf30b38d8d2205602b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a479404d04b136790176ebddc366fdd0b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symtab_8h.html#a479404d04b136790176ebddc366fdd0b">symtabParam</a> (<a class="el" href="symtab_8h.html#structsymtab__symbol__t">symtab_symbol_t</a> *func, <a class="el" href="symtab_8h.html#structsymtab__symbol__t">symtab_symbol_t</a> *sym)</td></tr>
+<tr class="memdesc:a479404d04b136790176ebddc366fdd0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hängt ein neues Symbol an den Anfang der Parameterliste eines Funktionssymbols.  <a href="#a479404d04b136790176ebddc366fdd0b">Mehr ...</a><br/></td></tr>
+<tr class="separator:a479404d04b136790176ebddc366fdd0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69eb5df8255d1c04899264d20ea6f944"><td class="memItemLeft" align="right" valign="top"><a class="el" href="symtab_8h.html#structsymtab__symbol__t">symtab_symbol_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symtab_8h.html#a69eb5df8255d1c04899264d20ea6f944">symtabLookup</a> (const <a class="el" href="symtab_8h.html#structsymtab__t">symtab_t</a> *self, const char *id)</td></tr>
+<tr class="memdesc:a69eb5df8255d1c04899264d20ea6f944"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sucht nach einem Symbol mit einem Bezeichner.  <a href="#a69eb5df8255d1c04899264d20ea6f944">Mehr ...</a><br/></td></tr>
+<tr class="separator:a69eb5df8255d1c04899264d20ea6f944"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af301b560e63c34a3b5996ea5a15c9a0a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="symtab_8h.html#structsymtab__symbol__t">symtab_symbol_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symtab_8h.html#af301b560e63c34a3b5996ea5a15c9a0a">symtabSymbol</a> (const char *name, <a class="el" href="syntree_8h.html#aab94349306c4f00232fa7a54212c0352">syntree_node_type</a> type)</td></tr>
+<tr class="memdesc:af301b560e63c34a3b5996ea5a15c9a0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erstellt und initialisiert ein neues Symbol für die Symboltabelle.  <a href="#af301b560e63c34a3b5996ea5a15c9a0a">Mehr ...</a><br/></td></tr>
+<tr class="separator:af301b560e63c34a3b5996ea5a15c9a0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfbfafe2eb4c05069353a3eae6d0b4d9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="symtab_8h.html#structsymtab__symbol__t">symtab_symbol_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symtab_8h.html#abfbfafe2eb4c05069353a3eae6d0b4d9">symtabParamFirst</a> (const <a class="el" href="symtab_8h.html#structsymtab__symbol__t">symtab_symbol_t</a> *func)</td></tr>
+<tr class="memdesc:abfbfafe2eb4c05069353a3eae6d0b4d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wählt den ersten Funktionsparameter aus.  <a href="#abfbfafe2eb4c05069353a3eae6d0b4d9">Mehr ...</a><br/></td></tr>
+<tr class="separator:abfbfafe2eb4c05069353a3eae6d0b4d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad576a32ccb1be39f521bec429b8e53c6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="symtab_8h.html#structsymtab__symbol__t">symtab_symbol_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symtab_8h.html#ad576a32ccb1be39f521bec429b8e53c6">symtabParamNext</a> (const <a class="el" href="symtab_8h.html#structsymtab__symbol__t">symtab_symbol_t</a> *param)</td></tr>
+<tr class="memdesc:ad576a32ccb1be39f521bec429b8e53c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wählt den nächsten Funktionsparameter aus.  <a href="#ad576a32ccb1be39f521bec429b8e53c6">Mehr ...</a><br/></td></tr>
+<tr class="separator:ad576a32ccb1be39f521bec429b8e53c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a056912f26cde3773f18c86973c9effe3"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symtab_8h.html#a056912f26cde3773f18c86973c9effe3">symtabMaxLocals</a> (const <a class="el" href="symtab_8h.html#structsymtab__t">symtab_t</a> *self)</td></tr>
+<tr class="memdesc:a056912f26cde3773f18c86973c9effe3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Berechnet die maximale Anzahl der lokalen Variablen auf dem Stack für den aktuellen oder letzten lokalen Block.  <a href="#a056912f26cde3773f18c86973c9effe3">Mehr ...</a><br/></td></tr>
+<tr class="separator:a056912f26cde3773f18c86973c9effe3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad71ea85f0fbd3fd9c4bcfff36d77e362"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symtab_8h.html#ad71ea85f0fbd3fd9c4bcfff36d77e362">symtabMaxGlobals</a> (const <a class="el" href="symtab_8h.html#structsymtab__t">symtab_t</a> *self)</td></tr>
+<tr class="memdesc:ad71ea85f0fbd3fd9c4bcfff36d77e362"><td class="mdescLeft">&#160;</td><td class="mdescRight">Berechnet die maximale Anzahl der globalen Variablen auf dem Stack.  <a href="#ad71ea85f0fbd3fd9c4bcfff36d77e362">Mehr ...</a><br/></td></tr>
+<tr class="separator:ad71ea85f0fbd3fd9c4bcfff36d77e362"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad453a8041ee4541cdd063a58142aae8e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="symtab_8h.html#ad453a8041ee4541cdd063a58142aae8e">symtabPrint</a> (const <a class="el" href="symtab_8h.html#structsymtab__t">symtab_t</a> *self, FILE *out)</td></tr>
+<tr class="memdesc:ad453a8041ee4541cdd063a58142aae8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gibt den gesamten Inhalt der Symboltabelle aus.  <a href="#ad453a8041ee4541cdd063a58142aae8e">Mehr ...</a><br/></td></tr>
+<tr class="separator:ad453a8041ee4541cdd063a58142aae8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Ausführliche Beschreibung</h2>
+<div class="textblock"><p>Enthält eine Datenstruktur für die Verwaltung von Symbolen in einer Tabelle mit geschichteten Sichtbarkeitsbereichen. </p>
+<dl class="section author"><dt>Autor</dt><dd>Dorian Weber</dd></dl>
+<p>Hier ist ein Beispiel für die Benutzung der Symboltabelle: </p>
+<div class="fragment"><div class="line"><a class="code" href="symtab_8h.html#structsymtab__t" title="Struktur der Symboltabelle.">symtab_t</a> tab;</div>
+<div class="line"><a class="code" href="symtab_8h.html#structsymtab__symbol__t" title="Struktur eines Symbols in der Symboltabelle.">symtab_symbol_t</a>* sym;</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="symtab_8c.html#ad68de968895824dd7c346389f2a5b4fb" title="Initialisiert eine neue Symboltabelle.">symtabInit</a>(&amp;tab);</div>
+<div class="line"></div>
+<div class="line">sym = <a class="code" href="symtab_8c.html#af301b560e63c34a3b5996ea5a15c9a0a" title="Erstellt und initialisiert ein neues Symbol für die Symboltabelle.">symtabSymbol</a>(<span class="stringliteral">&quot;foo&quot;</span>, SYNTREE_TYPE_Void);</div>
+<div class="line">sym-&gt;<a class="code" href="symtab_8h.html#a56643eab1cb3b6daf761ec2fddc2c26f" title="1 für Funktionen.">is_function</a> = 1;</div>
+<div class="line"><a class="code" href="symtab_8c.html#a479404d04b136790176ebddc366fdd0b" title="Hängt ein neues Symbol an den Anfang der Parameterliste eines Funktionssymbols.">symtabParam</a>(sym, <a class="code" href="symtab_8c.html#af301b560e63c34a3b5996ea5a15c9a0a" title="Erstellt und initialisiert ein neues Symbol für die Symboltabelle.">symtabSymbol</a>(<span class="stringliteral">&quot;c&quot;</span>, SYNTREE_TYPE_Integer));</div>
+<div class="line"><a class="code" href="symtab_8c.html#a479404d04b136790176ebddc366fdd0b" title="Hängt ein neues Symbol an den Anfang der Parameterliste eines Funktionssymbols.">symtabParam</a>(sym, <a class="code" href="symtab_8c.html#af301b560e63c34a3b5996ea5a15c9a0a" title="Erstellt und initialisiert ein neues Symbol für die Symboltabelle.">symtabSymbol</a>(<span class="stringliteral">&quot;b&quot;</span>, SYNTREE_TYPE_Float));</div>
+<div class="line"><a class="code" href="symtab_8c.html#a479404d04b136790176ebddc366fdd0b" title="Hängt ein neues Symbol an den Anfang der Parameterliste eines Funktionssymbols.">symtabParam</a>(sym, <a class="code" href="symtab_8c.html#af301b560e63c34a3b5996ea5a15c9a0a" title="Erstellt und initialisiert ein neues Symbol für die Symboltabelle.">symtabSymbol</a>(<span class="stringliteral">&quot;a&quot;</span>, SYNTREE_TYPE_Boolean));</div>
+<div class="line"><a class="code" href="symtab_8c.html#a0d61f8a97ef38ccf30b38d8d2205602b" title="Deklariert ein neues Symbol im aktuellen Sichtbarkeitsbereich.">symtabInsert</a>(&amp;tab, sym);</div>
+<div class="line"></div>
+<div class="line">sym = <a class="code" href="symtab_8c.html#af301b560e63c34a3b5996ea5a15c9a0a" title="Erstellt und initialisiert ein neues Symbol für die Symboltabelle.">symtabSymbol</a>(<span class="stringliteral">&quot;main&quot;</span>, SYNTREE_TYPE_Void);</div>
+<div class="line">sym-&gt;<a class="code" href="symtab_8h.html#a56643eab1cb3b6daf761ec2fddc2c26f" title="1 für Funktionen.">is_function</a> = 1;</div>
+<div class="line"><a class="code" href="symtab_8c.html#a0d61f8a97ef38ccf30b38d8d2205602b" title="Deklariert ein neues Symbol im aktuellen Sichtbarkeitsbereich.">symtabInsert</a>(&amp;tab, sym);</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="symtab_8c.html#ad0bb9d863a33cb62ca7217f84e40cc50" title="Öffnet einen neuen Sichtbarkeitsbereich.">symtabEnter</a>(&amp;tab);</div>
+<div class="line"><a class="code" href="symtab_8c.html#a0d61f8a97ef38ccf30b38d8d2205602b" title="Deklariert ein neues Symbol im aktuellen Sichtbarkeitsbereich.">symtabInsert</a>(&amp;tab, <a class="code" href="symtab_8c.html#af301b560e63c34a3b5996ea5a15c9a0a" title="Erstellt und initialisiert ein neues Symbol für die Symboltabelle.">symtabSymbol</a>(<span class="stringliteral">&quot;foo&quot;</span>, SYNTREE_TYPE_Float));</div>
+<div class="line"><a class="code" href="symtab_8c.html#a0d61f8a97ef38ccf30b38d8d2205602b" title="Deklariert ein neues Symbol im aktuellen Sichtbarkeitsbereich.">symtabInsert</a>(&amp;tab, <a class="code" href="symtab_8c.html#af301b560e63c34a3b5996ea5a15c9a0a" title="Erstellt und initialisiert ein neues Symbol für die Symboltabelle.">symtabSymbol</a>(<span class="stringliteral">&quot;bar&quot;</span>, SYNTREE_TYPE_Float));</div>
+<div class="line"></div>
+<div class="line"><a class="code" href="symtab_8c.html#ad453a8041ee4541cdd063a58142aae8e" title="Gibt den gesamten Inhalt der Symboltabelle aus.">symtabPrint</a>(&amp;tab, stdout);</div>
+<div class="line"><a class="code" href="symtab_8c.html#a786d1742a4f3e7f3b17e77e66aa8f42d" title="Gibt eine Symboltabelle und alle darin enthaltenen Symbole frei.">symtabRelease</a>(&amp;tab);</div>
+</div><!-- fragment --><p> mit der Ausgabe </p>
+<div class="fragment"><div class="line">+---------------------</div>
+<div class="line">|Symbol count: 4</div>
+<div class="line">|Block count:  2</div>
+<div class="line">|--------&lt; 0 &gt;--------</div>
+<div class="line">|(0) Void foo(Boolean a:[0], Float b:[0], Integer c:[0])</div>
+<div class="line">|(1) Void main()</div>
+<div class="line">|--------&lt; 1 &gt;--------</div>
+<div class="line">|(2) Float foo:[0] {shadows 0}</div>
+<div class="line">|(3) Float bar:[1]</div>
+<div class="line">+---------------------</div>
+</div><!-- fragment --><p> Im oberen Teil der Ausgabe stehen generelle Kenngrößen der Symboltabelle, danach folgen die gestapelten Schichten, jeweils mit allen deklarierten Symbolen. Funktionen haben Parameter und Variablen einen Index. Der Index wird im Syntaxbaum später zur Adressierung der Variablen verwendet. Falls ein Variablenname in mehreren Schichten auftaucht, wird der Verweis auf die überdeckte Schicht mit ausgegeben. Die Parameter haben in der Beispielausgabe alle den Index 0, weil sie niemals in die Symboltabelle eingefügt worden sind und es daher niemals möglich war auf sie zuzugreifen. Die Position im Stack wird erst beim Einfügen in die Symboltabelle berechnet. </p>
+
+<p>Definiert in Datei <a class="el" href="symtab_8h_source.html">symtab.h</a>.</p>
+</div><hr/><h2 class="groupheader">Datenstruktur-Dokumentation</h2>
+<a name="structsymtab__symbol__t" id="structsymtab__symbol__t"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct symtab_symbol_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="textblock"><p>Struktur eines Symbols in der Symboltabelle. </p>
+<dl class="section see"><dt>Siehe auch</dt><dd><a href="http://en.cppreference.com/w/c/language/bit_field">http://en.cppreference.com/w/c/language/bit_field</a> </dd></dl>
+
+<p>Definiert in Zeile <a class="el" href="symtab_8h_source.html#l00071">71</a> der Datei <a class="el" href="symtab_8h_source.html">symtab.h</a>.</p>
+</div><table class="fieldtable">
+<tr><th colspan="3">Datenstruktur-Elemente</th></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="a0dcb516620140f6955306f95c7fa111f"></a><a class="el" href="syntree_8h.html#a401c92017fbc6893cee77daa9353c5fb">syntree_nid</a></td>
+<td class="fieldname">
+body</td>
+<td class="fielddoc">
+Knoten-ID für Funktionskörper. </td></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="a02f86889ac7e95d71e815255dc73a72f"></a>unsigned int</td>
+<td class="fieldname">
+id</td>
+<td class="fielddoc">
+Position im decl-Stack. </td></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="a56643eab1cb3b6daf761ec2fddc2c26f"></a>unsigned int</td>
+<td class="fieldname">
+is_function: 1</td>
+<td class="fielddoc">
+1 für Funktionen. </td></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="aece20754561d800fa8b288e0bfe2c102"></a>unsigned int</td>
+<td class="fieldname">
+is_global: 1</td>
+<td class="fielddoc">
+1 für globale Variablen </td></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="a1be7d3e07efb942d97dee429591e3978"></a>unsigned int</td>
+<td class="fieldname">
+is_param: 1</td>
+<td class="fielddoc">
+1 für Funktionsparameter. </td></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="aa5de10849cae382bdc5004818789730b"></a>char *</td>
+<td class="fieldname">
+name</td>
+<td class="fielddoc">
+Bezeichner im Quellcode. </td></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="ab05fa80e6229088cf8d0c1040b317dc0"></a>struct symtab_symbol_s *</td>
+<td class="fieldname">
+par_next</td>
+<td class="fielddoc">
+Zeiger auf (Folge-) Parameter. </td></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="a23503d256b36d34cd693649d92c7044a"></a>unsigned int</td>
+<td class="fieldname">
+pos</td>
+<td class="fielddoc">
+Position im Variablenkontext. </td></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="a57259ac097eed6980bae91cf38076596"></a>struct symtab_symbol_s *</td>
+<td class="fieldname">
+rec_prev</td>
+<td class="fielddoc">
+Zeiger auf Vorgängerdefinition. </td></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="a6a4de2d66e3d3944eef2109ab4953c74"></a>unsigned int</td>
+<td class="fieldname">
+type: 3</td>
+<td class="fielddoc">
+Symboltyp. </td></tr>
+</table>
+
+</div>
+</div>
+<a name="structsymtab__t" id="structsymtab__t"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct symtab_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="textblock"><p>Struktur der Symboltabelle. </p>
+
+<p>Definiert in Zeile <a class="el" href="symtab_8h_source.html#l00089">89</a> der Datei <a class="el" href="symtab_8h_source.html">symtab.h</a>.</p>
+</div><table class="fieldtable">
+<tr><th colspan="3">Datenstruktur-Elemente</th></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="ac8e81a735f3067ba9a18e066ccfc07b4"></a>unsigned int *</td>
+<td class="fieldname">
+block</td>
+<td class="fielddoc">
+Stack der Anzahl von Blockvariablen. </td></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="a222b6f0fb517128a1726a5d75c5dfece"></a><a class="el" href="symtab_8h.html#structsymtab__symbol__t">symtab_symbol_t</a> **</td>
+<td class="fieldname">
+decl</td>
+<td class="fielddoc">
+Stack aller deklarierten Symbole. </td></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="a3f27ffd31fd7a4e42ab2cad13d189119"></a><a class="el" href="dict_8h.html#structdict__t">dict_t</a></td>
+<td class="fieldname">
+map</td>
+<td class="fielddoc">
+Wörterbuch Bezeichner -&gt; aktuelle Definition. </td></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="a1ff40ad4336a84242c02448eff5dc02c"></a>unsigned int</td>
+<td class="fieldname">
+maxpos</td>
+<td class="fielddoc">
+Maximale Anzahl lokaler Variablen. </td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Dokumentation der Funktionen</h2>
+<a class="anchor" id="ad0bb9d863a33cb62ca7217f84e40cc50"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void symtabEnter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="symtab_8h.html#structsymtab__t">symtab_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Öffnet einen neuen Sichtbarkeitsbereich. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>die Symboltabelle </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definiert in Zeile <a class="el" href="symtab_8c_source.html#l00092">92</a> der Datei <a class="el" href="symtab_8c_source.html">symtab.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad68de968895824dd7c346389f2a5b4fb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int symtabInit </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="symtab_8h.html#structsymtab__t">symtab_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialisiert eine neue Symboltabelle. </p>
+<p>Alle Variablen, die auf der obersten Ebene deklariert werden, werden automatisch als global markiert (is_global == 1). Variablen in Blöcken sind lokal (is_global == 0).</p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>die Symboltabelle </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>0, falls keine Fehler aufgetreten sind,<br/>
+ != 0, falls nicht genug Speicher zur Verfügung steht </dd></dl>
+
+<p>Definiert in Zeile <a class="el" href="symtab_8c_source.html#l00053">53</a> der Datei <a class="el" href="symtab_8c_source.html">symtab.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0d61f8a97ef38ccf30b38d8d2205602b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int symtabInsert </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="symtab_8h.html#structsymtab__t">symtab_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="symtab_8h.html#structsymtab__symbol__t">symtab_symbol_t</a> *&#160;</td>
+          <td class="paramname"><em>sym</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Deklariert ein neues Symbol im aktuellen Sichtbarkeitsbereich. </p>
+<p>Falls es sich um die oberste Ebene handelt (bevor der erste Block geöffnet wurde), wird das Symbol als global markiert (is_global == 1). Die Funktion prüft, ob ein Symbol dieses Namens bereits im aktuellen Sichtbarkeitsbereich existert. Sollte das der Fall sein, wird die Operation ignoriert und ein Rückgabewert != 0 zurückgegeben.</p>
+<p>Symbole mit gesetztem Parameterbit (is_param == 1) können ganz normal als lokale Symbole eingefügt werden, werden beim Abräumen der Symbole am Ende des lokalen Blocks jedoch nicht freigegeben, sondern erst, wenn das Symbol mit gesetztem Funktionsbit (is_function == 1) freigegeben wird.</p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>die Symboltabelle </td></tr>
+    <tr><td class="paramname">sym</td><td>das Symbol </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>0, falls erfolgreich,<br/>
+ != 0, falls eine Doppel-Deklaration vorliegt </dd></dl>
+
+<p>Definiert in Zeile <a class="el" href="symtab_8c_source.html#l00126">126</a> der Datei <a class="el" href="symtab_8c_source.html">symtab.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4e0a472001616d30c1be096bac56773b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void symtabLeave </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="symtab_8h.html#structsymtab__t">symtab_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Schließt den Sichtbarkeitsbereich, räumt alle Variablen ab und stellt den Zustand vor der Öffnung des Blocks wieder her. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>die Symboltabelle </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definiert in Zeile <a class="el" href="symtab_8c_source.html#l00101">101</a> der Datei <a class="el" href="symtab_8c_source.html">symtab.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a69eb5df8255d1c04899264d20ea6f944"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="symtab_8h.html#structsymtab__symbol__t">symtab_symbol_t</a>* symtabLookup </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="symtab_8h.html#structsymtab__t">symtab_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sucht nach einem Symbol mit einem Bezeichner. </p>
+<p>Das gefundene Symbol entspricht der aktuell gültigen Definition.</p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>die Symboltabelle </td></tr>
+    <tr><td class="paramname">id</td><td>der Bezeichner </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>das assoziierte Symbol, falls vorhanden,<br/>
+ <code>NULL</code>, ansonsten </dd></dl>
+
+<p>Definiert in Zeile <a class="el" href="symtab_8c_source.html#l00180">180</a> der Datei <a class="el" href="symtab_8c_source.html">symtab.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad71ea85f0fbd3fd9c4bcfff36d77e362"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int symtabMaxGlobals </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="symtab_8h.html#structsymtab__t">symtab_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Berechnet die maximale Anzahl der globalen Variablen auf dem Stack. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>die Symboltabelle </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>maximale Anzahl globaler Variablen </dd></dl>
+
+<p>Definiert in Zeile <a class="el" href="symtab_8c_source.html#l00230">230</a> der Datei <a class="el" href="symtab_8c_source.html">symtab.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a056912f26cde3773f18c86973c9effe3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int symtabMaxLocals </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="symtab_8h.html#structsymtab__t">symtab_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Berechnet die maximale Anzahl der lokalen Variablen auf dem Stack für den aktuellen oder letzten lokalen Block. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>die Symboltabelle </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>maximale Anzahl lokaler Variablen im lokalen Block </dd></dl>
+
+<p>Definiert in Zeile <a class="el" href="symtab_8c_source.html#l00224">224</a> der Datei <a class="el" href="symtab_8c_source.html">symtab.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a479404d04b136790176ebddc366fdd0b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void symtabParam </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="symtab_8h.html#structsymtab__symbol__t">symtab_symbol_t</a> *&#160;</td>
+          <td class="paramname"><em>func</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="symtab_8h.html#structsymtab__symbol__t">symtab_symbol_t</a> *&#160;</td>
+          <td class="paramname"><em>sym</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Hängt ein neues Symbol an den Anfang der Parameterliste eines Funktionssymbols. </p>
+<p>Das anzuhängende Symbol wird automatisch als Parameter markiert.</p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">func</td><td>das Funktionssymbol </td></tr>
+    <tr><td class="paramname">sym</td><td>das Parametersymbol </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definiert in Zeile <a class="el" href="symtab_8c_source.html#l00171">171</a> der Datei <a class="el" href="symtab_8c_source.html">symtab.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="abfbfafe2eb4c05069353a3eae6d0b4d9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="symtab_8h.html#structsymtab__symbol__t">symtab_symbol_t</a>* symtabParamFirst </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="symtab_8h.html#structsymtab__symbol__t">symtab_symbol_t</a> *&#160;</td>
+          <td class="paramname"><em>func</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Wählt den ersten Funktionsparameter aus. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">func</td><td>das Funktionssymbol </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>der erste Funktionsparameter </dd></dl>
+
+<p>Definiert in Zeile <a class="el" href="symtab_8c_source.html#l00210">210</a> der Datei <a class="el" href="symtab_8c_source.html">symtab.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad576a32ccb1be39f521bec429b8e53c6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="symtab_8h.html#structsymtab__symbol__t">symtab_symbol_t</a>* symtabParamNext </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="symtab_8h.html#structsymtab__symbol__t">symtab_symbol_t</a> *&#160;</td>
+          <td class="paramname"><em>param</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Wählt den nächsten Funktionsparameter aus. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">param</td><td>der aktuelle Funktionsparameter </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>der nächste Parameter oder<br/>
+ <code>NULL</code>, falls <code>param</code> der letzte Parameter ist </dd></dl>
+
+<p>Definiert in Zeile <a class="el" href="symtab_8c_source.html#l00217">217</a> der Datei <a class="el" href="symtab_8c_source.html">symtab.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad453a8041ee4541cdd063a58142aae8e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void symtabPrint </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="symtab_8h.html#structsymtab__t">symtab_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>out</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gibt den gesamten Inhalt der Symboltabelle aus. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>die Symboltabelle </td></tr>
+    <tr><td class="paramname">out</td><td>der Ausgabestrom </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definiert in Zeile <a class="el" href="symtab_8c_source.html#l00242">242</a> der Datei <a class="el" href="symtab_8c_source.html">symtab.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a786d1742a4f3e7f3b17e77e66aa8f42d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void symtabRelease </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="symtab_8h.html#structsymtab__t">symtab_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gibt eine Symboltabelle und alle darin enthaltenen Symbole frei. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>die Symboltabelle </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definiert in Zeile <a class="el" href="symtab_8c_source.html#l00074">74</a> der Datei <a class="el" href="symtab_8c_source.html">symtab.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="af301b560e63c34a3b5996ea5a15c9a0a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="symtab_8h.html#structsymtab__symbol__t">symtab_symbol_t</a>* symtabSymbol </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="syntree_8h.html#aab94349306c4f00232fa7a54212c0352">syntree_node_type</a>&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Erstellt und initialisiert ein neues Symbol für die Symboltabelle. </p>
+<p>Das Symbol sollte konfiguriert und dann in die Symboltabelle eingetragen werden.</p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>der Name des Symbols (später der Bezeichner) </td></tr>
+    <tr><td class="paramname">type</td><td>der Datentyp des Symbols</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>das neu-erstellte Symbol </dd></dl>
+
+<p>Definiert in Zeile <a class="el" href="symtab_8c_source.html#l00186">186</a> der Datei <a class="el" href="symtab_8c_source.html">symtab.c</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Erzeugt von &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.3.1
+</small></address>
+</body>
+</html>

@@ -1,0 +1,511 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.3.1"/>
+<title>Minako: dict.c-Dateireferenz</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="minako.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Minako
+   </div>
+   <div id="projectbrief">Dokumentation des studentischen Programminterpreters &quot;Minako&quot;.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Erzeugt von Doxygen 1.8.3.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Suchen" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Auflistung&#160;der&#160;Dateien</span></a></li>
+      <li><a href="globals.html"><span>Datei-Elemente</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Alle</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Datenstrukturen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Dateien</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funktionen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variablen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typdefinitionen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Aufzählungen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Makrodefinitionen</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Datenstrukturen</a> &#124;
+<a href="#typedef-members">Typdefinitionen</a> &#124;
+<a href="#func-members">Funktionen</a>  </div>
+  <div class="headertitle">
+<div class="title">dict.c-Dateireferenz</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Implementation des assoziativen Arrays.  
+<a href="#details">Mehr ...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="dict_8h_source.html">dict.h</a>&quot;</code><br/>
+<code>#include &lt;stdio.h&gt;</code><br/>
+<code>#include &lt;stdlib.h&gt;</code><br/>
+<code>#include &lt;string.h&gt;</code><br/>
+<code>#include &lt;limits.h&gt;</code><br/>
+<code>#include &lt;assert.h&gt;</code><br/>
+</div><div class="textblock"><div class="dynheader">
+Include-Abhängigkeitsdiagramm für dict.c:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="dict_8c__incl.svg" width="503" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+<p><a href="dict_8c_source.html">gehe zum Quellcode dieser Datei</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Datenstrukturen</h2></td></tr>
+<tr class="memitem:structlocate__result__t"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dict_8c.html#structlocate__result__t">locate_result_t</a></td></tr>
+<tr class="memdesc:structlocate__result__t"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rückgabetyp für Lokalisierungsanfragen an ein Wörterbuch.  <a href="dict_8c.html#structlocate__result__t">Mehr ...</a><br/></td></tr>
+<tr class="separator:structlocate__result__t"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typdefinitionen</h2></td></tr>
+<tr class="memitem:afb05a131363b0de134535fc5f7b01dc0"><td class="memItemLeft" align="right" valign="top">typedef unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dict_8c.html#afb05a131363b0de134535fc5f7b01dc0">hash_t</a></td></tr>
+<tr class="memdesc:afb05a131363b0de134535fc5f7b01dc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ganzzahlentyp für den Hashwert.  <a href="#afb05a131363b0de134535fc5f7b01dc0">Mehr ...</a><br/></td></tr>
+<tr class="separator:afb05a131363b0de134535fc5f7b01dc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funktionen</h2></td></tr>
+<tr class="memitem:aafb1c94591f829e46bfea69fdb22cde9"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="dict_8c.html#afb05a131363b0de134535fc5f7b01dc0">hash_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dict_8c.html#aafb1c94591f829e46bfea69fdb22cde9">fnvHash</a> (const char *key)</td></tr>
+<tr class="memdesc:aafb1c94591f829e46bfea69fdb22cde9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hashfunktion FNV-1a von Fowler, Noll und Vo.  <a href="#aafb1c94591f829e46bfea69fdb22cde9">Mehr ...</a><br/></td></tr>
+<tr class="separator:aafb1c94591f829e46bfea69fdb22cde9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6dfaa8fa2dc01c58b93a7a8ae6b1851c"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dict_8c.html#a6dfaa8fa2dc01c58b93a7a8ae6b1851c">locate</a> (const <a class="el" href="dict_8h.html#structdict__t">dict_t</a> *self, const char *key, <a class="el" href="dict_8c.html#structlocate__result__t">locate_result_t</a> *result)</td></tr>
+<tr class="memdesc:a6dfaa8fa2dc01c58b93a7a8ae6b1851c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Findet den Eintrag zu einem gegebenen Schlüssel oder die erste freie Position, falls der Schlüssel nicht enthalten ist.  <a href="#a6dfaa8fa2dc01c58b93a7a8ae6b1851c">Mehr ...</a><br/></td></tr>
+<tr class="separator:a6dfaa8fa2dc01c58b93a7a8ae6b1851c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6be34c47422e8f101a41812c19786e4"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dict_8c.html#ac6be34c47422e8f101a41812c19786e4">grow</a> (<a class="el" href="dict_8h.html#structdict__t">dict_t</a> *self)</td></tr>
+<tr class="memdesc:ac6be34c47422e8f101a41812c19786e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verdoppelt die Größe des Wörterbuchs und hasht alle Werte neu.  <a href="#ac6be34c47422e8f101a41812c19786e4">Mehr ...</a><br/></td></tr>
+<tr class="separator:ac6be34c47422e8f101a41812c19786e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5dd882871af44b71a769d23b9de2336d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dict_8c.html#a5dd882871af44b71a769d23b9de2336d">dictInit</a> (<a class="el" href="dict_8h.html#structdict__t">dict_t</a> *self)</td></tr>
+<tr class="memdesc:a5dd882871af44b71a769d23b9de2336d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialisiert das Wörterbuch.  <a href="#a5dd882871af44b71a769d23b9de2336d">Mehr ...</a><br/></td></tr>
+<tr class="separator:a5dd882871af44b71a769d23b9de2336d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1a68b15718d14c9ed689c1071462101"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dict_8c.html#aa1a68b15718d14c9ed689c1071462101">dictRelease</a> (<a class="el" href="dict_8h.html#structdict__t">dict_t</a> *self)</td></tr>
+<tr class="memdesc:aa1a68b15718d14c9ed689c1071462101"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gibt ein Wörterbuch und alle darin gespeicherten Schlüssel frei.  <a href="#aa1a68b15718d14c9ed689c1071462101">Mehr ...</a><br/></td></tr>
+<tr class="separator:aa1a68b15718d14c9ed689c1071462101"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3e4450877fe3e4b6371688d0ca938da"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dict_8c.html#af3e4450877fe3e4b6371688d0ca938da">dictSet</a> (<a class="el" href="dict_8h.html#structdict__t">dict_t</a> *self, const char *key, const void *val)</td></tr>
+<tr class="memdesc:af3e4450877fe3e4b6371688d0ca938da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assoziiert einen Schlüssel mit einem Wert.  <a href="#af3e4450877fe3e4b6371688d0ca938da">Mehr ...</a><br/></td></tr>
+<tr class="separator:af3e4450877fe3e4b6371688d0ca938da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2de687e7ed613ddb0a3fc3cc00b59da5"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dict_8c.html#a2de687e7ed613ddb0a3fc3cc00b59da5">dictGet</a> (const <a class="el" href="dict_8h.html#structdict__t">dict_t</a> *self, const char *key)</td></tr>
+<tr class="memdesc:a2de687e7ed613ddb0a3fc3cc00b59da5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gibt den Wert zu einem Schlüssel zurück.  <a href="#a2de687e7ed613ddb0a3fc3cc00b59da5">Mehr ...</a><br/></td></tr>
+<tr class="separator:a2de687e7ed613ddb0a3fc3cc00b59da5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32b03df99f31e08423ba2f4f0a79b094"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dict_8c.html#a32b03df99f31e08423ba2f4f0a79b094">dictDel</a> (<a class="el" href="dict_8h.html#structdict__t">dict_t</a> *self, const char *key)</td></tr>
+<tr class="memdesc:a32b03df99f31e08423ba2f4f0a79b094"><td class="mdescLeft">&#160;</td><td class="mdescRight">Entfernt eine Schlüssel-/Wert-Assoziation.  <a href="#a32b03df99f31e08423ba2f4f0a79b094">Mehr ...</a><br/></td></tr>
+<tr class="separator:a32b03df99f31e08423ba2f4f0a79b094"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Ausführliche Beschreibung</h2>
+<div class="textblock"><p>Implementation des assoziativen Arrays. </p>
+<dl class="section author"><dt>Autor</dt><dd>Dorian Weber </dd></dl>
+
+<p>Definiert in Datei <a class="el" href="dict_8c_source.html">dict.c</a>.</p>
+</div><hr/><h2 class="groupheader">Datenstruktur-Dokumentation</h2>
+<a name="structlocate__result__t" id="structlocate__result__t"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct locate_result_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="textblock"><p>Rückgabetyp für Lokalisierungsanfragen an ein Wörterbuch. </p>
+
+<p>Definiert in Zeile <a class="el" href="dict_8c_source.html#l00019">19</a> der Datei <a class="el" href="dict_8c_source.html">dict.c</a>.</p>
+</div><table class="fieldtable">
+<tr><th colspan="3">Datenstruktur-Elemente</th></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="a94e6a13e3f1ba9313649305d116dea00"></a>unsigned int</td>
+<td class="fieldname">
+i</td>
+<td class="fielddoc">
+Rückgabeindex. </td></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="a38162e6ef4a467b5dc2499913df4d518"></a><a class="el" href="dict_8h.html#structdict__entry__t">dict_entry_t</a> *</td>
+<td class="fieldname">
+p</td>
+<td class="fielddoc">
+Zeiger auf das Rückgabeelement. </td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Dokumentation der benutzerdefinierten Typen</h2>
+<a class="anchor" id="afb05a131363b0de134535fc5f7b01dc0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef unsigned int <a class="el" href="dict_8c.html#afb05a131363b0de134535fc5f7b01dc0">hash_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Ganzzahlentyp für den Hashwert. </p>
+
+<p>Definiert in Zeile <a class="el" href="dict_8c_source.html#l00028">28</a> der Datei <a class="el" href="dict_8c_source.html">dict.c</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Dokumentation der Funktionen</h2>
+<a class="anchor" id="a32b03df99f31e08423ba2f4f0a79b094"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* dictDel </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="dict_8h.html#structdict__t">dict_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>key</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Entfernt eine Schlüssel-/Wert-Assoziation. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>das Wörterbuch </td></tr>
+    <tr><td class="paramname">key</td><td>der Schlüssel </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>der entfernte Wert, falls der Schlüssel enthalten ist,<br/>
+ <code>NULL</code>, ansonsten </dd></dl>
+
+<p>Definiert in Zeile <a class="el" href="dict_8c_source.html#l00243">243</a> der Datei <a class="el" href="dict_8c_source.html">dict.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2de687e7ed613ddb0a3fc3cc00b59da5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* dictGet </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="dict_8h.html#structdict__t">dict_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>key</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gibt den Wert zu einem Schlüssel zurück. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>das Wörterbuch </td></tr>
+    <tr><td class="paramname">key</td><td>der Schlüssel </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>der assoziierte Wert, falls der Schlüssel enthalten ist,<br/>
+ <code>NULL</code>, ansonsten </dd></dl>
+
+<p>Definiert in Zeile <a class="el" href="dict_8c_source.html#l00232">232</a> der Datei <a class="el" href="dict_8c_source.html">dict.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a5dd882871af44b71a769d23b9de2336d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int dictInit </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="dict_8h.html#structdict__t">dict_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialisiert das Wörterbuch. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>das Wörterbuch </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>0, falls keine Fehler aufgetreten sind,<br/>
+ != 0, falls nicht genug Speicher zur Verfügung steht </dd></dl>
+
+<p>Definiert in Zeile <a class="el" href="dict_8c_source.html#l00173">173</a> der Datei <a class="el" href="dict_8c_source.html">dict.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa1a68b15718d14c9ed689c1071462101"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void dictRelease </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="dict_8h.html#structdict__t">dict_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gibt ein Wörterbuch und alle darin gespeicherten Schlüssel frei. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>das Wörterbuch </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definiert in Zeile <a class="el" href="dict_8c_source.html#l00182">182</a> der Datei <a class="el" href="dict_8c_source.html">dict.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="af3e4450877fe3e4b6371688d0ca938da"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* dictSet </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="dict_8h.html#structdict__t">dict_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>val</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Assoziiert einen Schlüssel mit einem Wert. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>das Wörterbuch </td></tr>
+    <tr><td class="paramname">key</td><td>der Schlüssel </td></tr>
+    <tr><td class="paramname">val</td><td>der neue Wert </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>der alte Wert, falls er überschrieben wurde,<br/>
+ <code>NULL</code>, ansonsten </dd></dl>
+
+<p>Definiert in Zeile <a class="el" href="dict_8c_source.html#l00197">197</a> der Datei <a class="el" href="dict_8c_source.html">dict.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aafb1c94591f829e46bfea69fdb22cde9"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="dict_8c.html#afb05a131363b0de134535fc5f7b01dc0">hash_t</a> fnvHash </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>key</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Hashfunktion FNV-1a von Fowler, Noll und Vo. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>der Schlüssel </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>der Hashwert von <code>key</code> </dd></dl>
+
+<p>Definiert in Zeile <a class="el" href="dict_8c_source.html#l00041">41</a> der Datei <a class="el" href="dict_8c_source.html">dict.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ac6be34c47422e8f101a41812c19786e4"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void grow </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="dict_8h.html#structdict__t">dict_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Verdoppelt die Größe des Wörterbuchs und hasht alle Werte neu. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>das Wörterbuch </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definiert in Zeile <a class="el" href="dict_8c_source.html#l00135">135</a> der Datei <a class="el" href="dict_8c_source.html">dict.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a6dfaa8fa2dc01c58b93a7a8ae6b1851c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int locate </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="dict_8h.html#structdict__t">dict_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="dict_8c.html#structlocate__result__t">locate_result_t</a> *&#160;</td>
+          <td class="paramname"><em>result</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Findet den Eintrag zu einem gegebenen Schlüssel oder die erste freie Position, falls der Schlüssel nicht enthalten ist. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">self</td><td>das Wörterbuch </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">key</td><td>der Schlüssel </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">result</td><td>Ergebnis </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>1, falls der Eintrag gefunden wurde,<br/>
+ 0, ansonsten </dd></dl>
+
+<p>Definiert in Zeile <a class="el" href="dict_8c_source.html#l00064">64</a> der Datei <a class="el" href="dict_8c_source.html">dict.c</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Erzeugt von &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.3.1
+</small></address>
+</body>
+</html>

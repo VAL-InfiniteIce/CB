@@ -1,0 +1,647 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.3.1"/>
+<title>Minako: minako.c-Dateireferenz</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="minako.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Minako
+   </div>
+   <div id="projectbrief">Dokumentation des studentischen Programminterpreters &quot;Minako&quot;.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Erzeugt von Doxygen 1.8.3.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Suchen" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Auflistung&#160;der&#160;Dateien</span></a></li>
+      <li><a href="globals.html"><span>Datei-Elemente</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Alle</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Datenstrukturen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Dateien</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funktionen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variablen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typdefinitionen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Aufzählungen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Makrodefinitionen</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Datenstrukturen</a> &#124;
+<a href="#define-members">Makrodefinitionen</a> &#124;
+<a href="#typedef-members">Typdefinitionen</a> &#124;
+<a href="#func-members">Funktionen</a> &#124;
+<a href="#var-members">Variablen</a>  </div>
+  <div class="headertitle">
+<div class="title">minako.c-Dateireferenz</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Enthält den Interpreter sowie den Einstiegspunkt in das Programm.  
+<a href="#details">Mehr ...</a></p>
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br/>
+<code>#include &lt;stdlib.h&gt;</code><br/>
+<code>#include &lt;string.h&gt;</code><br/>
+<code>#include &lt;assert.h&gt;</code><br/>
+<code>#include &quot;minako-syntax.tab.h&quot;</code><br/>
+<code>#include &quot;<a class="el" href="symtab_8h_source.html">symtab.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="syntree_8h_source.html">syntree.h</a>&quot;</code><br/>
+</div><div class="textblock"><div class="dynheader">
+Include-Abhängigkeitsdiagramm für minako.c:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="minako_8c__incl.svg" width="699" height="272"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+<p><a href="minako_8c_source.html">gehe zum Quellcode dieser Datei</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Datenstrukturen</h2></td></tr>
+<tr class="memitem:structminako__value__t"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="minako_8c.html#structminako__value__t">minako_value_t</a></td></tr>
+<tr class="memdesc:structminako__value__t"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ein Variablenwert im Interpreter.  <a href="minako_8c.html#structminako__value__t">Mehr ...</a><br/></td></tr>
+<tr class="separator:structminako__value__t"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:structminako__vm__t"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="minako_8c.html#structminako__vm__t">minako_vm_t</a></td></tr>
+<tr class="memdesc:structminako__vm__t"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struktur des Laufzeitzustands des Interpreters.  <a href="minako_8c.html#structminako__vm__t">Mehr ...</a><br/></td></tr>
+<tr class="separator:structminako__vm__t"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:unionminako__value__t_8value"><td class="memItemLeft" align="right" valign="top">union &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="minako_8c.html#unionminako__value__t_8value">minako_value_t.value</a></td></tr>
+<tr class="memdesc:unionminako__value__t_8value"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variablenwert.  <a href="minako_8c.html#unionminako__value__t_8value">Mehr ...</a><br/></td></tr>
+<tr class="separator:unionminako__value__t_8value"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Makrodefinitionen</h2></td></tr>
+<tr class="memitem:ad0d1d843e20e4902393fe084f084b456"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="minako_8c.html#ad0d1d843e20e4902393fe084f084b456">MINAKO_STACK_SIZE</a>&#160;&#160;&#160;1024</td></tr>
+<tr class="memdesc:ad0d1d843e20e4902393fe084f084b456"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximale Anzahl gleichzeitig verwendeter Variablen im Interpreter.  <a href="#ad0d1d843e20e4902393fe084f084b456">Mehr ...</a><br/></td></tr>
+<tr class="separator:ad0d1d843e20e4902393fe084f084b456"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6adb6fd5c5e79dc4108fa7b2a79fd768"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="minako_8c.html#a6adb6fd5c5e79dc4108fa7b2a79fd768">TRACE_ENTER</a>(TAG)</td></tr>
+<tr class="memdesc:a6adb6fd5c5e79dc4108fa7b2a79fd768"><td class="mdescLeft">&#160;</td><td class="mdescRight">Schreibt den Namen eines Knotentags eingerückt in die Standardausgabe und erhöht die Einrückung.  <a href="#a6adb6fd5c5e79dc4108fa7b2a79fd768">Mehr ...</a><br/></td></tr>
+<tr class="separator:a6adb6fd5c5e79dc4108fa7b2a79fd768"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00dd8848bf4888e961647b37a375ac37"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="minako_8c.html#a00dd8848bf4888e961647b37a375ac37">TRACE_LEAVE</a>(TAG)</td></tr>
+<tr class="memdesc:a00dd8848bf4888e961647b37a375ac37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verringert die Einrückung und schreibt den Namen eines Knotentags eingerückt in die Standardausgabe.  <a href="#a00dd8848bf4888e961647b37a375ac37">Mehr ...</a><br/></td></tr>
+<tr class="separator:a00dd8848bf4888e961647b37a375ac37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa64bcb36fecf8b75ec5d196969e522c6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="minako_8c.html#aa64bcb36fecf8b75ec5d196969e522c6">TRACE_VALUE</a>(VAL)</td></tr>
+<tr class="memdesc:aa64bcb36fecf8b75ec5d196969e522c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Schreibt den Wert einer Stackvariablen eingerückt in die Ausgabe.  <a href="#aa64bcb36fecf8b75ec5d196969e522c6">Mehr ...</a><br/></td></tr>
+<tr class="separator:aa64bcb36fecf8b75ec5d196969e522c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typdefinitionen</h2></td></tr>
+<tr class="memitem:ad458827123643fbef374facbdec3e289"><td class="memItemLeft" align="right" valign="top">typedef void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="minako_8c.html#ad458827123643fbef374facbdec3e289">minako_exec_p</a> (const <a class="el" href="syntree_8h.html#structsyntree__node__t">syntree_node_t</a> *node)</td></tr>
+<tr class="memdesc:ad458827123643fbef374facbdec3e289"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prototyp von Funktionen, die einen Knoten interpretieren.  <a href="#ad458827123643fbef374facbdec3e289">Mehr ...</a><br/></td></tr>
+<tr class="separator:ad458827123643fbef374facbdec3e289"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a01470325ae955188401db3386eb0e7"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="minako_8c.html#ad458827123643fbef374facbdec3e289">minako_exec_p</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="minako_8c.html#a2a01470325ae955188401db3386eb0e7">minako_exec_f</a></td></tr>
+<tr class="memdesc:a2a01470325ae955188401db3386eb0e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funktionszeigertyp der Interpreter-Funktionen.  <a href="#a2a01470325ae955188401db3386eb0e7">Mehr ...</a><br/></td></tr>
+<tr class="separator:a2a01470325ae955188401db3386eb0e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funktionen</h2></td></tr>
+<tr class="memitem:a940e941a6ce7166a7c67e22af7a5cde0"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="syntree_8h.html#structsyntree__node__t">syntree_node_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="minako_8c.html#a940e941a6ce7166a7c67e22af7a5cde0">nodeFirst</a> (const <a class="el" href="syntree_8h.html#structsyntree__node__t">syntree_node_t</a> *node)</td></tr>
+<tr class="memdesc:a940e941a6ce7166a7c67e22af7a5cde0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gibt den ersten Kindknoten eines Containers zurück.  <a href="#a940e941a6ce7166a7c67e22af7a5cde0">Mehr ...</a><br/></td></tr>
+<tr class="separator:a940e941a6ce7166a7c67e22af7a5cde0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad17752e9d3bbcf14a55dc9e8325bd4e0"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="syntree_8h.html#structsyntree__node__t">syntree_node_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="minako_8c.html#ad17752e9d3bbcf14a55dc9e8325bd4e0">nodeLast</a> (const <a class="el" href="syntree_8h.html#structsyntree__node__t">syntree_node_t</a> *node)</td></tr>
+<tr class="memdesc:ad17752e9d3bbcf14a55dc9e8325bd4e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gibt den letzten Kindknoten eines Containers zurück.  <a href="#ad17752e9d3bbcf14a55dc9e8325bd4e0">Mehr ...</a><br/></td></tr>
+<tr class="separator:ad17752e9d3bbcf14a55dc9e8325bd4e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3963c74a6179e6396e97d39df30c9d51"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="syntree_8h.html#structsyntree__node__t">syntree_node_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="minako_8c.html#a3963c74a6179e6396e97d39df30c9d51">nodeNext</a> (const <a class="el" href="syntree_8h.html#structsyntree__node__t">syntree_node_t</a> *node)</td></tr>
+<tr class="memdesc:a3963c74a6179e6396e97d39df30c9d51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gibt den Folgeknoten eines Knotens zurück.  <a href="#a3963c74a6179e6396e97d39df30c9d51">Mehr ...</a><br/></td></tr>
+<tr class="separator:a3963c74a6179e6396e97d39df30c9d51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a412cbcad6a0a07fd8efc695e6555623a"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="minako_8c.html#a412cbcad6a0a07fd8efc695e6555623a">nodeSentinel</a> (const <a class="el" href="syntree_8h.html#structsyntree__node__t">syntree_node_t</a> *node)</td></tr>
+<tr class="memdesc:a412cbcad6a0a07fd8efc695e6555623a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prüft ob der gegebene Knoten der Terminatorknoten ist. Terminatorknoten terminieren Container, analog zum terminierenden 0-Byte für C-Strings.  <a href="#a412cbcad6a0a07fd8efc695e6555623a">Mehr ...</a><br/></td></tr>
+<tr class="separator:a412cbcad6a0a07fd8efc695e6555623a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea4ddf66dc007900b2b73cca49ab7a46"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="minako_8c.html#structminako__value__t">minako_value_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="minako_8c.html#aea4ddf66dc007900b2b73cca49ab7a46">dispatch</a> (const <a class="el" href="syntree_8h.html#structsyntree__node__t">syntree_node_t</a> *node)</td></tr>
+<tr class="memdesc:aea4ddf66dc007900b2b73cca49ab7a46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ruft für einen gegebenen Knoten die entsprechende Ausführungsfunktion.  <a href="#aea4ddf66dc007900b2b73cca49ab7a46">Mehr ...</a><br/></td></tr>
+<tr class="separator:aea4ddf66dc007900b2b73cca49ab7a46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variablen</h2></td></tr>
+<tr class="memitem:aee4ad87c5e9784528709017b6c5fcdca"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="minako_8c.html#structminako__vm__t">minako_vm_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="minako_8c.html#aee4ad87c5e9784528709017b6c5fcdca">vm</a></td></tr>
+<tr class="memdesc:aee4ad87c5e9784528709017b6c5fcdca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Globaler Zeiger auf den aktuellen Zustand der virtuellen Maschine.  <a href="#aee4ad87c5e9784528709017b6c5fcdca">Mehr ...</a><br/></td></tr>
+<tr class="separator:aee4ad87c5e9784528709017b6c5fcdca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabd0339853ce476f02e0da0e772dc6fa"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="minako_8c.html#a2a01470325ae955188401db3386eb0e7">minako_exec_f</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="minako_8c.html#aabd0339853ce476f02e0da0e772dc6fa">dispatchTable</a> []</td></tr>
+<tr class="memdesc:aabd0339853ce476f02e0da0e772dc6fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Statische Dispatchtabelle zur Lokalisierung der richtigen Interpreterfunktion für einen gegebenen Knotentyp im Syntaxbaum.  <a href="#aabd0339853ce476f02e0da0e772dc6fa">Mehr ...</a><br/></td></tr>
+<tr class="separator:aabd0339853ce476f02e0da0e772dc6fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Ausführliche Beschreibung</h2>
+<div class="textblock"><p>Enthält den Interpreter sowie den Einstiegspunkt in das Programm. </p>
+<dl class="section author"><dt>Autor</dt><dd>Dorian Weber und die Studenten </dd></dl>
+
+<p>Definiert in Datei <a class="el" href="minako_8c_source.html">minako.c</a>.</p>
+</div><hr/><h2 class="groupheader">Datenstruktur-Dokumentation</h2>
+<a name="structminako__value__t" id="structminako__value__t"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct minako_value_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="textblock"><p>Ein Variablenwert im Interpreter. </p>
+
+<p>Definiert in Zeile <a class="el" href="minako_8c_source.html#l00024">24</a> der Datei <a class="el" href="minako_8c_source.html">minako.c</a>.</p>
+</div><table class="fieldtable">
+<tr><th colspan="3">Datenstruktur-Elemente</th></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="a4b0c7cc77312177b485d38303df45498"></a><a class="el" href="syntree_8h.html#aab94349306c4f00232fa7a54212c0352">syntree_node_type</a></td>
+<td class="fieldname">
+type</td>
+<td class="fielddoc">
+Typ des Variablenwertes. </td></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="a962048c53b2a0f2fd7a3887e359ca8c5"></a>union <a class="el" href="minako_8c.html#unionminako__value__t_8value">minako_value_t</a></td>
+<td class="fieldname">
+value</td>
+<td class="fielddoc">
+</td></tr>
+</table>
+
+</div>
+</div>
+<a name="structminako__vm__t" id="structminako__vm__t"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct minako_vm_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="textblock"><p>Struktur des Laufzeitzustands des Interpreters. </p>
+
+<p>Definiert in Zeile <a class="el" href="minako_8c_source.html#l00043">43</a> der Datei <a class="el" href="minako_8c_source.html">minako.c</a>.</p>
+</div><table class="fieldtable">
+<tr><th colspan="3">Datenstruktur-Elemente</th></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="a763f70730744060250bd9799bc322e2d"></a><a class="el" href="minako_8c.html#structminako__value__t">minako_value_t</a></td>
+<td class="fieldname">
+eax</td>
+<td class="fielddoc">
+Ausgaberegister. </td></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="a6849e1af510810a81e8975580750475a"></a><a class="el" href="minako_8c.html#structminako__value__t">minako_value_t</a> *</td>
+<td class="fieldname">
+ebp</td>
+<td class="fielddoc">
+Base pointer. </td></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="a9250cbe27b357a2cd9f01c805eba4c38"></a><a class="el" href="minako_8c.html#structminako__value__t">minako_value_t</a> *</td>
+<td class="fieldname">
+esp</td>
+<td class="fielddoc">
+Stack pointer. </td></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="a730cfa29f4567e9733696039c3f6a19d"></a>int</td>
+<td class="fieldname">
+returnFlag</td>
+<td class="fielddoc">
+Signalisiert das Verlassen einer Funktion. </td></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="a77dc6e865352ec3c3d3724ba2c7e2e4f"></a><a class="el" href="minako_8c.html#structminako__value__t">minako_value_t</a></td>
+<td class="fieldname">
+stack[1024]</td>
+<td class="fielddoc">
+Variablenstack. </td></tr>
+</table>
+
+</div>
+</div>
+<a name="unionminako__value__t_8value" id="unionminako__value__t_8value"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">union minako_value_t.value</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="textblock"><p>Variablenwert. </p>
+
+<p>Definiert in Zeile <a class="el" href="minako_8c_source.html#l00032">32</a> der Datei <a class="el" href="minako_8c_source.html">minako.c</a>.</p>
+</div><table class="fieldtable">
+<tr><th colspan="3">Datenstruktur-Elemente</th></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="a84e2c64f38f78ba3ea5c905ab5a2da27"></a>int</td>
+<td class="fieldname">
+boolean</td>
+<td class="fielddoc">
+Boolescher Wert. </td></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="a157db7df530023575515d366c9b672e8"></a>int</td>
+<td class="fieldname">
+integer</td>
+<td class="fielddoc">
+Ganzzahliger Wert. </td></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="a4bca24304861acde5770fdbe3cc2503b"></a>float</td>
+<td class="fieldname">
+real</td>
+<td class="fielddoc">
+Fließkommawert. </td></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="ab45cffe084dd3d20d928bee85e7b0f21"></a>char *</td>
+<td class="fieldname">
+string</td>
+<td class="fielddoc">
+Zeiger auf Zeichenkette. </td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Makro-Dokumentation</h2>
+<a class="anchor" id="ad0d1d843e20e4902393fe084f084b456"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MINAKO_STACK_SIZE&#160;&#160;&#160;1024</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Maximale Anzahl gleichzeitig verwendeter Variablen im Interpreter. </p>
+
+<p>Definiert in Zeile <a class="el" href="minako_8c_source.html#l00018">18</a> der Datei <a class="el" href="minako_8c_source.html">minako.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a6adb6fd5c5e79dc4108fa7b2a79fd768"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TRACE_ENTER</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">TAG</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Wert:</b><div class="fragment"><div class="line"><span class="keywordflow">if</span> (yydebug) { \</div>
+<div class="line">            printf(<span class="stringliteral">&quot;%*s&lt;%s&gt;\n&quot;</span>, indent*4, <span class="stringliteral">&quot;&quot;</span>, <a class="code" href="syntree_8c.html#a6f0a8326af3e40f45333dfd118450327" title="Konstantes Array, das von Knotentags auf Strings abbildet.">nodeTagName</a>[TAG]); \</div>
+<div class="line">            ++indent; \</div>
+<div class="line">        }</div>
+</div><!-- fragment -->
+<p>Schreibt den Namen eines Knotentags eingerückt in die Standardausgabe und erhöht die Einrückung. </p>
+
+<p>Definiert in Zeile <a class="el" href="minako_8c_source.html#l00096">96</a> der Datei <a class="el" href="minako_8c_source.html">minako.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a00dd8848bf4888e961647b37a375ac37"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TRACE_LEAVE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">TAG</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Wert:</b><div class="fragment"><div class="line"><span class="keywordflow">if</span> (yydebug) { \</div>
+<div class="line">            --indent; \</div>
+<div class="line">            printf(<span class="stringliteral">&quot;%*s&lt;/%s&gt;\n&quot;</span>, indent*4, <span class="stringliteral">&quot;&quot;</span>, <a class="code" href="syntree_8c.html#a6f0a8326af3e40f45333dfd118450327" title="Konstantes Array, das von Knotentags auf Strings abbildet.">nodeTagName</a>[TAG]); \</div>
+<div class="line">        }</div>
+</div><!-- fragment -->
+<p>Verringert die Einrückung und schreibt den Namen eines Knotentags eingerückt in die Standardausgabe. </p>
+
+<p>Definiert in Zeile <a class="el" href="minako_8c_source.html#l00105">105</a> der Datei <a class="el" href="minako_8c_source.html">minako.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa64bcb36fecf8b75ec5d196969e522c6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TRACE_VALUE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">VAL</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Wert:</b><div class="fragment"><div class="line"><span class="keywordflow">if</span> (yydebug) { \</div>
+<div class="line">            printf(<span class="stringliteral">&quot;%*s&quot;</span>, indent*4, <span class="stringliteral">&quot;&quot;</span>); \</div>
+<div class="line">            switch (VAL.type) { \</div>
+<div class="line">            case SYNTREE_TYPE_Boolean: \</div>
+<div class="line">                printf(<span class="stringliteral">&quot;%s&quot;</span>, VAL.value.boolean ? <span class="stringliteral">&quot;true&quot;</span> : <span class="stringliteral">&quot;false&quot;</span>); \</div>
+<div class="line">                break; \</div>
+<div class="line">            case SYNTREE_TYPE_Integer: \</div>
+<div class="line">                printf(<span class="stringliteral">&quot;%i&quot;</span>, VAL.value.integer); \</div>
+<div class="line">                break; \</div>
+<div class="line">            case SYNTREE_TYPE_Float: \</div>
+<div class="line">                printf(<span class="stringliteral">&quot;%g&quot;</span>, VAL.value.real); \</div>
+<div class="line">                break; \</div>
+<div class="line">            case SYNTREE_TYPE_String: \</div>
+<div class="line">                printf(<span class="stringliteral">&quot;\&quot;%s\&quot;&quot;</span>, VAL.value.string); \</div>
+<div class="line">                break; \</div>
+<div class="line">            case SYNTREE_TYPE_Void: \</div>
+<div class="line">                printf(<span class="stringliteral">&quot;(void)&quot;</span>); \</div>
+<div class="line">                break; \</div>
+<div class="line">            } \</div>
+<div class="line">            putc(<span class="charliteral">&#39;\n&#39;</span>, stdout); \</div>
+<div class="line">        }</div>
+</div><!-- fragment -->
+<p>Schreibt den Wert einer Stackvariablen eingerückt in die Ausgabe. </p>
+
+<p>Definiert in Zeile <a class="el" href="minako_8c_source.html#l00113">113</a> der Datei <a class="el" href="minako_8c_source.html">minako.c</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Dokumentation der benutzerdefinierten Typen</h2>
+<a class="anchor" id="a2a01470325ae955188401db3386eb0e7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="minako_8c.html#ad458827123643fbef374facbdec3e289">minako_exec_p</a>* <a class="el" href="minako_8c.html#a2a01470325ae955188401db3386eb0e7">minako_exec_f</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Funktionszeigertyp der Interpreter-Funktionen. </p>
+
+<p>Definiert in Zeile <a class="el" href="minako_8c_source.html#l00061">61</a> der Datei <a class="el" href="minako_8c_source.html">minako.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad458827123643fbef374facbdec3e289"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void minako_exec_p(const <a class="el" href="syntree_8h.html#structsyntree__node__t">syntree_node_t</a> *node)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Prototyp von Funktionen, die einen Knoten interpretieren. </p>
+<dl class="section note"><dt>Zu beachten</dt><dd>Der Zustand der virtuellen Maschine und der ausgeführte Syntaxbaum werden der Einfachheit halber implizit als globale Variablen bereitgestellt. </dd></dl>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node</td><td>der zu interpretierende Knoten </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definiert in Zeile <a class="el" href="minako_8c_source.html#l00057">57</a> der Datei <a class="el" href="minako_8c_source.html">minako.c</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Dokumentation der Funktionen</h2>
+<a class="anchor" id="aea4ddf66dc007900b2b73cca49ab7a46"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="minako_8c.html#structminako__value__t">minako_value_t</a> dispatch </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="syntree_8h.html#structsyntree__node__t">syntree_node_t</a> *&#160;</td>
+          <td class="paramname"><em>node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Ruft für einen gegebenen Knoten die entsprechende Ausführungsfunktion. </p>
+
+<p>Definiert in Zeile <a class="el" href="minako_8c_source.html#l00182">182</a> der Datei <a class="el" href="minako_8c_source.html">minako.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a940e941a6ce7166a7c67e22af7a5cde0"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static const <a class="el" href="syntree_8h.html#structsyntree__node__t">syntree_node_t</a>* nodeFirst </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="syntree_8h.html#structsyntree__node__t">syntree_node_t</a> *&#160;</td>
+          <td class="paramname"><em>node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gibt den ersten Kindknoten eines Containers zurück. </p>
+
+<p>Definiert in Zeile <a class="el" href="minako_8c_source.html#l00146">146</a> der Datei <a class="el" href="minako_8c_source.html">minako.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad17752e9d3bbcf14a55dc9e8325bd4e0"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static const <a class="el" href="syntree_8h.html#structsyntree__node__t">syntree_node_t</a>* nodeLast </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="syntree_8h.html#structsyntree__node__t">syntree_node_t</a> *&#160;</td>
+          <td class="paramname"><em>node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gibt den letzten Kindknoten eines Containers zurück. </p>
+
+<p>Definiert in Zeile <a class="el" href="minako_8c_source.html#l00154">154</a> der Datei <a class="el" href="minako_8c_source.html">minako.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a3963c74a6179e6396e97d39df30c9d51"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static const <a class="el" href="syntree_8h.html#structsyntree__node__t">syntree_node_t</a>* nodeNext </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="syntree_8h.html#structsyntree__node__t">syntree_node_t</a> *&#160;</td>
+          <td class="paramname"><em>node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gibt den Folgeknoten eines Knotens zurück. </p>
+
+<p>Definiert in Zeile <a class="el" href="minako_8c_source.html#l00162">162</a> der Datei <a class="el" href="minako_8c_source.html">minako.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a412cbcad6a0a07fd8efc695e6555623a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int nodeSentinel </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="syntree_8h.html#structsyntree__node__t">syntree_node_t</a> *&#160;</td>
+          <td class="paramname"><em>node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Prüft ob der gegebene Knoten der Terminatorknoten ist. Terminatorknoten terminieren Container, analog zum terminierenden 0-Byte für C-Strings. </p>
+
+<p>Definiert in Zeile <a class="el" href="minako_8c_source.html#l00172">172</a> der Datei <a class="el" href="minako_8c_source.html">minako.c</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Variablen-Dokumentation</h2>
+<a class="anchor" id="aabd0339853ce476f02e0da0e772dc6fa"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="minako_8c.html#a2a01470325ae955188401db3386eb0e7">minako_exec_f</a> dispatchTable[]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initialisierung:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">        &amp;execInteger ,    &amp;execFloat ,    &amp;execBoolean ,    &amp;execString ,    &amp;execLocVar ,    &amp;execGlobVar ,       &amp;execProgram ,    &amp;execFunction ,    &amp;execCall ,    &amp;execSequence ,    &amp;execIf ,    &amp;execFor ,    &amp;execDoWhile ,    &amp;execWhile ,    &amp;execPrint ,    &amp;execAssign ,    &amp;execReturn ,       &amp;execCast ,    &amp;execPlus ,    &amp;execMinus ,    &amp;execTimes ,    &amp;execDivide ,    &amp;execLogOr ,    &amp;execLogAnd ,    &amp;execUminus ,    &amp;execEqt ,    &amp;execNeq ,    &amp;execLeq ,    &amp;execGeq ,    &amp;execLst ,    &amp;execGrt , }</div>
+</div><!-- fragment -->
+<p>Statische Dispatchtabelle zur Lokalisierung der richtigen Interpreterfunktion für einen gegebenen Knotentyp im Syntaxbaum. </p>
+
+<p>Definiert in Zeile <a class="el" href="minako_8c_source.html#l00081">81</a> der Datei <a class="el" href="minako_8c_source.html">minako.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aee4ad87c5e9784528709017b6c5fcdca"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="minako_8c.html#structminako__vm__t">minako_vm_t</a>* vm</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Globaler Zeiger auf den aktuellen Zustand der virtuellen Maschine. </p>
+
+<p>Definiert in Zeile <a class="el" href="minako_8c_source.html#l00072">72</a> der Datei <a class="el" href="minako_8c_source.html">minako.c</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Erzeugt von &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.3.1
+</small></address>
+</body>
+</html>

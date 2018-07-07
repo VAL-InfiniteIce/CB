@@ -1,0 +1,853 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.3.1"/>
+<title>Minako: syntree.c-Dateireferenz</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="minako.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Minako
+   </div>
+   <div id="projectbrief">Dokumentation des studentischen Programminterpreters &quot;Minako&quot;.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Erzeugt von Doxygen 1.8.3.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Suchen" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Auflistung&#160;der&#160;Dateien</span></a></li>
+      <li><a href="globals.html"><span>Datei-Elemente</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Alle</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Datenstrukturen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Dateien</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funktionen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variablen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typdefinitionen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Aufzählungen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Makrodefinitionen</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Funktionen</a> &#124;
+<a href="#var-members">Variablen</a>  </div>
+  <div class="headertitle">
+<div class="title">syntree.c-Dateireferenz</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Implementation des Syntaxbaumes.  
+<a href="#details">Mehr ...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="syntree_8h_source.html">syntree.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="symtab_8h_source.html">symtab.h</a>&quot;</code><br/>
+<code>#include &lt;stdio.h&gt;</code><br/>
+<code>#include &lt;stdlib.h&gt;</code><br/>
+<code>#include &lt;string.h&gt;</code><br/>
+<code>#include &lt;assert.h&gt;</code><br/>
+</div><div class="textblock"><div class="dynheader">
+Include-Abhängigkeitsdiagramm für syntree.c:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="syntree_8c__incl.svg" width="444" height="272"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+<p><a href="syntree_8c_source.html">gehe zum Quellcode dieser Datei</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funktionen</h2></td></tr>
+<tr class="memitem:ad0331b5ba052f7d3fc6b68330122b2d2"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="syntree_8h.html#structsyntree__node__t">syntree_node_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntree_8c.html#ad0331b5ba052f7d3fc6b68330122b2d2">syntreeNodeAlloc</a> (<a class="el" href="syntree_8h.html#structsyntree__t">syntree_t</a> *self)</td></tr>
+<tr class="memdesc:ad0331b5ba052f7d3fc6b68330122b2d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macht Platz für einen neuen Knoten und gibt ihn zurück.  <a href="#ad0331b5ba052f7d3fc6b68330122b2d2">Mehr ...</a><br/></td></tr>
+<tr class="separator:ad0331b5ba052f7d3fc6b68330122b2d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38fd9736ec6fda38ce7bb4d9e8534c7c"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntree_8c.html#a38fd9736ec6fda38ce7bb4d9e8534c7c">syntreeIsPrimitive</a> (const <a class="el" href="syntree_8h.html#structsyntree__node__t">syntree_node_t</a> *node)</td></tr>
+<tr class="memdesc:a38fd9736ec6fda38ce7bb4d9e8534c7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gibt Auskunft, ob ein Knoten zu den atomaren Knoten gehört.  <a href="#a38fd9736ec6fda38ce7bb4d9e8534c7c">Mehr ...</a><br/></td></tr>
+<tr class="separator:a38fd9736ec6fda38ce7bb4d9e8534c7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab816eb3c54a21ee5b159948c92685647"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntree_8c.html#ab816eb3c54a21ee5b159948c92685647">syntreeInit</a> (<a class="el" href="syntree_8h.html#structsyntree__t">syntree_t</a> *self)</td></tr>
+<tr class="memdesc:ab816eb3c54a21ee5b159948c92685647"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialisiert einen neuen Syntaxbaum.  <a href="#ab816eb3c54a21ee5b159948c92685647">Mehr ...</a><br/></td></tr>
+<tr class="separator:ab816eb3c54a21ee5b159948c92685647"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7e542b08225d125952b6df21803f9c1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntree_8c.html#ae7e542b08225d125952b6df21803f9c1">syntreeRelease</a> (<a class="el" href="syntree_8h.html#structsyntree__t">syntree_t</a> *self)</td></tr>
+<tr class="memdesc:ae7e542b08225d125952b6df21803f9c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gibt den Syntaxbaum und alle assoziierten Strukturen frei.  <a href="#ae7e542b08225d125952b6df21803f9c1">Mehr ...</a><br/></td></tr>
+<tr class="separator:ae7e542b08225d125952b6df21803f9c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90dd8ad33131338fe5b7d18402e411ba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="syntree_8h.html#structsyntree__node__t">syntree_node_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntree_8c.html#a90dd8ad33131338fe5b7d18402e411ba">syntreeNodePtr</a> (const <a class="el" href="syntree_8h.html#structsyntree__t">syntree_t</a> *self, <a class="el" href="syntree_8h.html#a401c92017fbc6893cee77daa9353c5fb">syntree_nid</a> id)</td></tr>
+<tr class="memdesc:a90dd8ad33131338fe5b7d18402e411ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gegeben eine Knoten-ID, ermittelt den entsprechenden Zeiger.  <a href="#a90dd8ad33131338fe5b7d18402e411ba">Mehr ...</a><br/></td></tr>
+<tr class="separator:a90dd8ad33131338fe5b7d18402e411ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28b60f76ed75780d015f5f5df3d60102"><td class="memItemLeft" align="right" valign="top"><a class="el" href="syntree_8h.html#a401c92017fbc6893cee77daa9353c5fb">syntree_nid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntree_8c.html#a28b60f76ed75780d015f5f5df3d60102">syntreeNodeId</a> (const <a class="el" href="syntree_8h.html#structsyntree__t">syntree_t</a> *self, const <a class="el" href="syntree_8h.html#structsyntree__node__t">syntree_node_t</a> *node)</td></tr>
+<tr class="memdesc:a28b60f76ed75780d015f5f5df3d60102"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gegeben einen Knotenzeiger, ermittelt die entsprechende ID.  <a href="#a28b60f76ed75780d015f5f5df3d60102">Mehr ...</a><br/></td></tr>
+<tr class="separator:a28b60f76ed75780d015f5f5df3d60102"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f30444882c67f3ce06f0bc5e89ed9d2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="syntree_8h.html#a401c92017fbc6893cee77daa9353c5fb">syntree_nid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntree_8c.html#a4f30444882c67f3ce06f0bc5e89ed9d2">syntreeNodeBoolean</a> (<a class="el" href="syntree_8h.html#structsyntree__t">syntree_t</a> *self, int flag)</td></tr>
+<tr class="memdesc:a4f30444882c67f3ce06f0bc5e89ed9d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erstellt einen neuen Knoten mit einem Wahrheitswert als Inhalt.  <a href="#a4f30444882c67f3ce06f0bc5e89ed9d2">Mehr ...</a><br/></td></tr>
+<tr class="separator:a4f30444882c67f3ce06f0bc5e89ed9d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acca0764b39f7f06d42397c7e578800ed"><td class="memItemLeft" align="right" valign="top"><a class="el" href="syntree_8h.html#a401c92017fbc6893cee77daa9353c5fb">syntree_nid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntree_8c.html#acca0764b39f7f06d42397c7e578800ed">syntreeNodeInteger</a> (<a class="el" href="syntree_8h.html#structsyntree__t">syntree_t</a> *self, int number)</td></tr>
+<tr class="memdesc:acca0764b39f7f06d42397c7e578800ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erstellt einen neuen Knoten mit einem Zahlenwert als Inhalt.  <a href="#acca0764b39f7f06d42397c7e578800ed">Mehr ...</a><br/></td></tr>
+<tr class="separator:acca0764b39f7f06d42397c7e578800ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa784c673ca48bd57acef22a73ec4f433"><td class="memItemLeft" align="right" valign="top"><a class="el" href="syntree_8h.html#a401c92017fbc6893cee77daa9353c5fb">syntree_nid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntree_8c.html#aa784c673ca48bd57acef22a73ec4f433">syntreeNodeFloat</a> (<a class="el" href="syntree_8h.html#structsyntree__t">syntree_t</a> *self, float number)</td></tr>
+<tr class="memdesc:aa784c673ca48bd57acef22a73ec4f433"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erstellt einen neuen Knoten mit einem Fließkommawert als Inhalt.  <a href="#aa784c673ca48bd57acef22a73ec4f433">Mehr ...</a><br/></td></tr>
+<tr class="separator:aa784c673ca48bd57acef22a73ec4f433"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90372352ecae66ca14249f676c4f7c58"><td class="memItemLeft" align="right" valign="top"><a class="el" href="syntree_8h.html#a401c92017fbc6893cee77daa9353c5fb">syntree_nid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntree_8c.html#a90372352ecae66ca14249f676c4f7c58">syntreeNodeString</a> (<a class="el" href="syntree_8h.html#structsyntree__t">syntree_t</a> *self, char *text)</td></tr>
+<tr class="memdesc:a90372352ecae66ca14249f676c4f7c58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erstellt einen neuen Knoten mit einer Zeichenkette als Inhalt.  <a href="#a90372352ecae66ca14249f676c4f7c58">Mehr ...</a><br/></td></tr>
+<tr class="separator:a90372352ecae66ca14249f676c4f7c58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7948ef6dad8a70dfe0683d343e4fe8a0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="syntree_8h.html#a401c92017fbc6893cee77daa9353c5fb">syntree_nid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntree_8c.html#a7948ef6dad8a70dfe0683d343e4fe8a0">syntreeNodeCast</a> (<a class="el" href="syntree_8h.html#structsyntree__t">syntree_t</a> *self, <a class="el" href="syntree_8h.html#aab94349306c4f00232fa7a54212c0352">syntree_node_type</a> target, <a class="el" href="syntree_8h.html#a401c92017fbc6893cee77daa9353c5fb">syntree_nid</a> id)</td></tr>
+<tr class="memdesc:a7948ef6dad8a70dfe0683d343e4fe8a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erstellt einen neuen Knoten für eine Typkonvertierung.  <a href="#a7948ef6dad8a70dfe0683d343e4fe8a0">Mehr ...</a><br/></td></tr>
+<tr class="separator:a7948ef6dad8a70dfe0683d343e4fe8a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef28b771a6fbcb4c9d12cbd4113032f6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="syntree_8h.html#a401c92017fbc6893cee77daa9353c5fb">syntree_nid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntree_8c.html#aef28b771a6fbcb4c9d12cbd4113032f6">syntreeNodeEmpty</a> (<a class="el" href="syntree_8h.html#structsyntree__t">syntree_t</a> *self, <a class="el" href="syntree_8h.html#afcb8b50a3f680e5740ce172fc28463c8">syntree_node_tag</a> tag)</td></tr>
+<tr class="memdesc:aef28b771a6fbcb4c9d12cbd4113032f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erstellt einen leeren Containerknoten.  <a href="#aef28b771a6fbcb4c9d12cbd4113032f6">Mehr ...</a><br/></td></tr>
+<tr class="separator:aef28b771a6fbcb4c9d12cbd4113032f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b29623a9a7756c89a4011dfffebc9e3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="syntree_8h.html#a401c92017fbc6893cee77daa9353c5fb">syntree_nid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntree_8c.html#a8b29623a9a7756c89a4011dfffebc9e3">syntreeNodeTag</a> (<a class="el" href="syntree_8h.html#structsyntree__t">syntree_t</a> *self, <a class="el" href="syntree_8h.html#afcb8b50a3f680e5740ce172fc28463c8">syntree_node_tag</a> tag, <a class="el" href="syntree_8h.html#a401c92017fbc6893cee77daa9353c5fb">syntree_nid</a> id)</td></tr>
+<tr class="memdesc:a8b29623a9a7756c89a4011dfffebc9e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Kapselt einen Knoten innerhalb eines anderen Knotens.  <a href="#a8b29623a9a7756c89a4011dfffebc9e3">Mehr ...</a><br/></td></tr>
+<tr class="separator:a8b29623a9a7756c89a4011dfffebc9e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe335b423e910587d2386885c2fa5e81"><td class="memItemLeft" align="right" valign="top"><a class="el" href="syntree_8h.html#a401c92017fbc6893cee77daa9353c5fb">syntree_nid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntree_8c.html#afe335b423e910587d2386885c2fa5e81">syntreeNodePair</a> (<a class="el" href="syntree_8h.html#structsyntree__t">syntree_t</a> *self, <a class="el" href="syntree_8h.html#afcb8b50a3f680e5740ce172fc28463c8">syntree_node_tag</a> tag, <a class="el" href="syntree_8h.html#a401c92017fbc6893cee77daa9353c5fb">syntree_nid</a> id1, <a class="el" href="syntree_8h.html#a401c92017fbc6893cee77daa9353c5fb">syntree_nid</a> id2)</td></tr>
+<tr class="memdesc:afe335b423e910587d2386885c2fa5e81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Kapselt zwei Knoten innerhalb eines Knoten.  <a href="#afe335b423e910587d2386885c2fa5e81">Mehr ...</a><br/></td></tr>
+<tr class="separator:afe335b423e910587d2386885c2fa5e81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb8af097398b8aa64b4d4c3c69edc530"><td class="memItemLeft" align="right" valign="top"><a class="el" href="syntree_8h.html#a401c92017fbc6893cee77daa9353c5fb">syntree_nid</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntree_8c.html#aeb8af097398b8aa64b4d4c3c69edc530">syntreeNodeAppend</a> (<a class="el" href="syntree_8h.html#structsyntree__t">syntree_t</a> *self, <a class="el" href="syntree_8h.html#a401c92017fbc6893cee77daa9353c5fb">syntree_nid</a> listId, <a class="el" href="syntree_8h.html#a401c92017fbc6893cee77daa9353c5fb">syntree_nid</a> elemId)</td></tr>
+<tr class="memdesc:aeb8af097398b8aa64b4d4c3c69edc530"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hängt einen Knoten an das Ende eines Listenknotens.  <a href="#aeb8af097398b8aa64b4d4c3c69edc530">Mehr ...</a><br/></td></tr>
+<tr class="separator:aeb8af097398b8aa64b4d4c3c69edc530"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d10fe13890c160374873de71c13b3c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntree_8c.html#a9d10fe13890c160374873de71c13b3c6">syntreePrint</a> (const <a class="el" href="syntree_8h.html#structsyntree__t">syntree_t</a> *self, <a class="el" href="syntree_8h.html#a401c92017fbc6893cee77daa9353c5fb">syntree_nid</a> root, FILE *out, int indent)</td></tr>
+<tr class="memdesc:a9d10fe13890c160374873de71c13b3c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gibt alle Zahlenknoten rekursiv (depth-first) aus.  <a href="#a9d10fe13890c160374873de71c13b3c6">Mehr ...</a><br/></td></tr>
+<tr class="separator:a9d10fe13890c160374873de71c13b3c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variablen</h2></td></tr>
+<tr class="memitem:a6f0a8326af3e40f45333dfd118450327"><td class="memItemLeft" align="right" valign="top">const char *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntree_8c.html#a6f0a8326af3e40f45333dfd118450327">nodeTagName</a> []</td></tr>
+<tr class="memdesc:a6f0a8326af3e40f45333dfd118450327"><td class="mdescLeft">&#160;</td><td class="mdescRight">Konstantes Array, das von Knotentags auf Strings abbildet.  <a href="#a6f0a8326af3e40f45333dfd118450327">Mehr ...</a><br/></td></tr>
+<tr class="separator:a6f0a8326af3e40f45333dfd118450327"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec3736d66b5bece379978962bf442d26"><td class="memItemLeft" align="right" valign="top">const char *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syntree_8c.html#aec3736d66b5bece379978962bf442d26">nodeTypeName</a> []</td></tr>
+<tr class="memdesc:aec3736d66b5bece379978962bf442d26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Konstantes Array, das von Knotentypen auf Strings abbildet.  <a href="#aec3736d66b5bece379978962bf442d26">Mehr ...</a><br/></td></tr>
+<tr class="separator:aec3736d66b5bece379978962bf442d26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Ausführliche Beschreibung</h2>
+<div class="textblock"><p>Implementation des Syntaxbaumes. </p>
+<dl class="section author"><dt>Autor</dt><dd>Dorian Weber </dd></dl>
+
+<p>Definiert in Datei <a class="el" href="syntree_8c_source.html">syntree.c</a>.</p>
+</div><h2 class="groupheader">Dokumentation der Funktionen</h2>
+<a class="anchor" id="ab816eb3c54a21ee5b159948c92685647"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int syntreeInit </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="syntree_8h.html#structsyntree__t">syntree_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialisiert einen neuen Syntaxbaum. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>der zu initialisierende Syntaxbaum </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>0, falls keine Fehler bei der Initialisierung aufgetreten sind<br/>
+ != 0 ansonsten </dd></dl>
+
+<p>Definiert in Zeile <a class="el" href="syntree_8c_source.html#l00075">75</a> der Datei <a class="el" href="syntree_8c_source.html">syntree.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a38fd9736ec6fda38ce7bb4d9e8534c7c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int syntreeIsPrimitive </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="syntree_8h.html#structsyntree__node__t">syntree_node_t</a> *&#160;</td>
+          <td class="paramname"><em>node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gibt Auskunft, ob ein Knoten zu den atomaren Knoten gehört. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node</td><td>der Knoten </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>1, falls ja,<br/>
+ 0, ansonsten </dd></dl>
+
+<p>Definiert in Zeile <a class="el" href="syntree_8c_source.html#l00053">53</a> der Datei <a class="el" href="syntree_8c_source.html">syntree.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad0331b5ba052f7d3fc6b68330122b2d2"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="syntree_8h.html#structsyntree__node__t">syntree_node_t</a>* syntreeNodeAlloc </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="syntree_8h.html#structsyntree__t">syntree_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Macht Platz für einen neuen Knoten und gibt ihn zurück. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>Syntaxbaum </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>ein frischer Knoten </dd></dl>
+
+<p>Definiert in Zeile <a class="el" href="syntree_8c_source.html#l00022">22</a> der Datei <a class="el" href="syntree_8c_source.html">syntree.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aeb8af097398b8aa64b4d4c3c69edc530"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="syntree_8h.html#a401c92017fbc6893cee77daa9353c5fb">syntree_nid</a> syntreeNodeAppend </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="syntree_8h.html#structsyntree__t">syntree_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="syntree_8h.html#a401c92017fbc6893cee77daa9353c5fb">syntree_nid</a>&#160;</td>
+          <td class="paramname"><em>list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="syntree_8h.html#a401c92017fbc6893cee77daa9353c5fb">syntree_nid</a>&#160;</td>
+          <td class="paramname"><em>elem</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Hängt einen Knoten an das Ende eines Listenknotens. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>der Syntaxbaum </td></tr>
+    <tr><td class="paramname">list</td><td>Listenknoten </td></tr>
+    <tr><td class="paramname">elem</td><td>anzuhängender Knoten </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>ID des Listenknoten </dd></dl>
+
+<p>Definiert in Zeile <a class="el" href="syntree_8c_source.html#l00247">247</a> der Datei <a class="el" href="syntree_8c_source.html">syntree.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4f30444882c67f3ce06f0bc5e89ed9d2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="syntree_8h.html#a401c92017fbc6893cee77daa9353c5fb">syntree_nid</a> syntreeNodeBoolean </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="syntree_8h.html#structsyntree__t">syntree_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>flag</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Erstellt einen neuen Knoten mit einem Wahrheitswert als Inhalt. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>der Syntaxbaum </td></tr>
+    <tr><td class="paramname">flag</td><td>der Wahrheitswert </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>ID des neu erstellten Knoten </dd></dl>
+
+<p>Definiert in Zeile <a class="el" href="syntree_8c_source.html#l00120">120</a> der Datei <a class="el" href="syntree_8c_source.html">syntree.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a7948ef6dad8a70dfe0683d343e4fe8a0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="syntree_8h.html#a401c92017fbc6893cee77daa9353c5fb">syntree_nid</a> syntreeNodeCast </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="syntree_8h.html#structsyntree__t">syntree_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="syntree_8h.html#aab94349306c4f00232fa7a54212c0352">syntree_node_type</a>&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="syntree_8h.html#a401c92017fbc6893cee77daa9353c5fb">syntree_nid</a>&#160;</td>
+          <td class="paramname"><em>id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Erstellt einen neuen Knoten für eine Typkonvertierung. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>der Syntaxbaum </td></tr>
+    <tr><td class="paramname">target</td><td>der Zieltyp </td></tr>
+    <tr><td class="paramname">id</td><td>Knoten-ID des Operanden </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>ID des neu erstellten Knoten </dd></dl>
+
+<p>Definiert in Zeile <a class="el" href="syntree_8c_source.html#l00191">191</a> der Datei <a class="el" href="syntree_8c_source.html">syntree.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aef28b771a6fbcb4c9d12cbd4113032f6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="syntree_8h.html#a401c92017fbc6893cee77daa9353c5fb">syntree_nid</a> syntreeNodeEmpty </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="syntree_8h.html#structsyntree__t">syntree_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="syntree_8h.html#afcb8b50a3f680e5740ce172fc28463c8">syntree_node_tag</a>&#160;</td>
+          <td class="paramname"><em>tag</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Erstellt einen leeren Containerknoten. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>die Symboltabelle </td></tr>
+    <tr><td class="paramname">tag</td><td>die Knotenart </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>ID des neu erstellten Knoten </dd></dl>
+
+<p>Definiert in Zeile <a class="el" href="syntree_8c_source.html#l00203">203</a> der Datei <a class="el" href="syntree_8c_source.html">syntree.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa784c673ca48bd57acef22a73ec4f433"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="syntree_8h.html#a401c92017fbc6893cee77daa9353c5fb">syntree_nid</a> syntreeNodeFloat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="syntree_8h.html#structsyntree__t">syntree_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>number</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Erstellt einen neuen Knoten mit einem Fließkommawert als Inhalt. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>der Syntaxbaum </td></tr>
+    <tr><td class="paramname">number</td><td>die Fließkommazahl </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>ID des neu erstellten Knoten </dd></dl>
+
+<p>Definiert in Zeile <a class="el" href="syntree_8c_source.html#l00142">142</a> der Datei <a class="el" href="syntree_8c_source.html">syntree.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a28b60f76ed75780d015f5f5df3d60102"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="syntree_8h.html#a401c92017fbc6893cee77daa9353c5fb">syntree_nid</a> syntreeNodeId </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="syntree_8h.html#structsyntree__t">syntree_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="syntree_8h.html#structsyntree__node__t">syntree_node_t</a> *&#160;</td>
+          <td class="paramname"><em>node</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gegeben einen Knotenzeiger, ermittelt die entsprechende ID. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>der Syntaxbaum </td></tr>
+    <tr><td class="paramname">node</td><td>der Zeiger auf einen Knoten in <code>self</code> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>die dazugehörige Knoten-ID </dd></dl>
+
+<p>Definiert in Zeile <a class="el" href="syntree_8c_source.html#l00114">114</a> der Datei <a class="el" href="syntree_8c_source.html">syntree.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="acca0764b39f7f06d42397c7e578800ed"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="syntree_8h.html#a401c92017fbc6893cee77daa9353c5fb">syntree_nid</a> syntreeNodeInteger </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="syntree_8h.html#structsyntree__t">syntree_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>number</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Erstellt einen neuen Knoten mit einem Zahlenwert als Inhalt. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>der Syntaxbaum </td></tr>
+    <tr><td class="paramname">number</td><td>die Zahl </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>ID des neu erstellten Knoten </dd></dl>
+
+<p>Definiert in Zeile <a class="el" href="syntree_8c_source.html#l00131">131</a> der Datei <a class="el" href="syntree_8c_source.html">syntree.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="afe335b423e910587d2386885c2fa5e81"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="syntree_8h.html#a401c92017fbc6893cee77daa9353c5fb">syntree_nid</a> syntreeNodePair </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="syntree_8h.html#structsyntree__t">syntree_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="syntree_8h.html#afcb8b50a3f680e5740ce172fc28463c8">syntree_node_tag</a>&#160;</td>
+          <td class="paramname"><em>tag</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="syntree_8h.html#a401c92017fbc6893cee77daa9353c5fb">syntree_nid</a>&#160;</td>
+          <td class="paramname"><em>id1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="syntree_8h.html#a401c92017fbc6893cee77daa9353c5fb">syntree_nid</a>&#160;</td>
+          <td class="paramname"><em>id2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Kapselt zwei Knoten innerhalb eines Knoten. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>der Syntaxbaum </td></tr>
+    <tr><td class="paramname">tag</td><td>die Knotenart </td></tr>
+    <tr><td class="paramname">id1</td><td>erster Knoten </td></tr>
+    <tr><td class="paramname">id2</td><td>zweiter Knoten </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>ID des neu erstellten Knoten </dd></dl>
+
+<p>Definiert in Zeile <a class="el" href="syntree_8c_source.html#l00222">222</a> der Datei <a class="el" href="syntree_8c_source.html">syntree.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a90dd8ad33131338fe5b7d18402e411ba"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="syntree_8h.html#structsyntree__node__t">syntree_node_t</a>* syntreeNodePtr </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="syntree_8h.html#structsyntree__t">syntree_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="syntree_8h.html#a401c92017fbc6893cee77daa9353c5fb">syntree_nid</a>&#160;</td>
+          <td class="paramname"><em>id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gegeben eine Knoten-ID, ermittelt den entsprechenden Zeiger. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>der Syntaxbaum </td></tr>
+    <tr><td class="paramname">id</td><td>die Knoten-ID </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>ein Zeiger auf den entsprechenden Knoten </dd></dl>
+
+<p>Definiert in Zeile <a class="el" href="syntree_8c_source.html#l00108">108</a> der Datei <a class="el" href="syntree_8c_source.html">syntree.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a90372352ecae66ca14249f676c4f7c58"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="syntree_8h.html#a401c92017fbc6893cee77daa9353c5fb">syntree_nid</a> syntreeNodeString </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="syntree_8h.html#structsyntree__t">syntree_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>text</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Erstellt einen neuen Knoten mit einer Zeichenkette als Inhalt. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>der Syntaxbaum </td></tr>
+    <tr><td class="paramname">text</td><td>die Zeichenkette </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Zu beachten</dt><dd><code>text</code> wird nicht kopiert, sondern übernommen; der Syntaxbaum ist für die Freigabe zuständig </dd></dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>ID des neu erstellten Knoten </dd></dl>
+
+<p>Definiert in Zeile <a class="el" href="syntree_8c_source.html#l00153">153</a> der Datei <a class="el" href="syntree_8c_source.html">syntree.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a8b29623a9a7756c89a4011dfffebc9e3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="syntree_8h.html#a401c92017fbc6893cee77daa9353c5fb">syntree_nid</a> syntreeNodeTag </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="syntree_8h.html#structsyntree__t">syntree_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="syntree_8h.html#afcb8b50a3f680e5740ce172fc28463c8">syntree_node_tag</a>&#160;</td>
+          <td class="paramname"><em>tag</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="syntree_8h.html#a401c92017fbc6893cee77daa9353c5fb">syntree_nid</a>&#160;</td>
+          <td class="paramname"><em>id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Kapselt einen Knoten innerhalb eines anderen Knotens. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>der Syntaxbaum </td></tr>
+    <tr><td class="paramname">tag</td><td>die Knotenart </td></tr>
+    <tr><td class="paramname">id</td><td>der zu kapselnde Knoten </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>ID des neu erstellten Knoten </dd></dl>
+
+<p>Definiert in Zeile <a class="el" href="syntree_8c_source.html#l00209">209</a> der Datei <a class="el" href="syntree_8c_source.html">syntree.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a9d10fe13890c160374873de71c13b3c6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void syntreePrint </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="syntree_8h.html#structsyntree__t">syntree_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="syntree_8h.html#a401c92017fbc6893cee77daa9353c5fb">syntree_nid</a>&#160;</td>
+          <td class="paramname"><em>root</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>indent</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gibt alle Zahlenknoten rekursiv (depth-first) aus. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>der Syntaxbaum </td></tr>
+    <tr><td class="paramname">root</td><td>der Wurzelknoten </td></tr>
+    <tr><td class="paramname">out</td><td>der Ausgabestrom </td></tr>
+    <tr><td class="paramname">indent</td><td>initiale Einrückung </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definiert in Zeile <a class="el" href="syntree_8c_source.html#l00273">273</a> der Datei <a class="el" href="syntree_8c_source.html">syntree.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae7e542b08225d125952b6df21803f9c1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void syntreeRelease </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="syntree_8h.html#structsyntree__t">syntree_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gibt den Syntaxbaum und alle assoziierten Strukturen frei. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>der freizugebende Syntaxbaum </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definiert in Zeile <a class="el" href="syntree_8c_source.html#l00090">90</a> der Datei <a class="el" href="syntree_8c_source.html">syntree.c</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Variablen-Dokumentation</h2>
+<a class="anchor" id="a6f0a8326af3e40f45333dfd118450327"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* const nodeTagName[]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initialisierung:</b><div class="fragment"><div class="line">= {</div>
+<div class="line"><span class="preprocessor">#define NAME(NODE) </span></div>
+<div class="line"><span class="preprocessor"></span>        <span class="stringliteral">&quot;Integer&quot;</span>,    <span class="stringliteral">&quot;Float&quot;</span>,    <span class="stringliteral">&quot;Boolean&quot;</span>,    <span class="stringliteral">&quot;String&quot;</span>,    <span class="stringliteral">&quot;LocVar&quot;</span>,    <span class="stringliteral">&quot;GlobVar&quot;</span>,       <span class="stringliteral">&quot;Program&quot;</span>,    <span class="stringliteral">&quot;Function&quot;</span>,    <span class="stringliteral">&quot;Call&quot;</span>,    <span class="stringliteral">&quot;Sequence&quot;</span>,    <span class="stringliteral">&quot;If&quot;</span>,    <span class="stringliteral">&quot;For&quot;</span>,    <span class="stringliteral">&quot;DoWhile&quot;</span>,    <span class="stringliteral">&quot;While&quot;</span>,    <span class="stringliteral">&quot;Print&quot;</span>,    <span class="stringliteral">&quot;Assign&quot;</span>,    <span class="stringliteral">&quot;Return&quot;</span>,       <span class="stringliteral">&quot;Cast&quot;</span>,    <span class="stringliteral">&quot;Plus&quot;</span>,    <span class="stringliteral">&quot;Minus&quot;</span>,    <span class="stringliteral">&quot;Times&quot;</span>,    <span class="stringliteral">&quot;Divide&quot;</span>,    <span class="stringliteral">&quot;LogOr&quot;</span>,    <span class="stringliteral">&quot;LogAnd&quot;</span>,    <span class="stringliteral">&quot;Uminus&quot;</span>,    <span class="stringliteral">&quot;Eqt&quot;</span>,    <span class="stringliteral">&quot;Neq&quot;</span>,    <span class="stringliteral">&quot;Leq&quot;</span>,    <span class="stringliteral">&quot;Geq&quot;</span>,    <span class="stringliteral">&quot;Lst&quot;</span>,    <span class="stringliteral">&quot;Grt&quot;</span>, #undef NAME</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p>Konstantes Array, das von Knotentags auf Strings abbildet. </p>
+
+<p>Definiert in Zeile <a class="el" href="syntree_8c_source.html#l00342">342</a> der Datei <a class="el" href="syntree_8c_source.html">syntree.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aec3736d66b5bece379978962bf442d26"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* const nodeTypeName[]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initialisierung:</b><div class="fragment"><div class="line">= {</div>
+<div class="line"><span class="preprocessor">#define NAME(NODE) </span></div>
+<div class="line"><span class="preprocessor"></span>     <span class="stringliteral">&quot;Void&quot;</span>,    <span class="stringliteral">&quot;Boolean&quot;</span>,    <span class="stringliteral">&quot;Integer&quot;</span>,    <span class="stringliteral">&quot;Float&quot;</span>,    <span class="stringliteral">&quot;String&quot;</span>, #undef NAME</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p>Konstantes Array, das von Knotentypen auf Strings abbildet. </p>
+
+<p>Definiert in Zeile <a class="el" href="syntree_8c_source.html#l00347">347</a> der Datei <a class="el" href="syntree_8c_source.html">syntree.c</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Erzeugt von &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.3.1
+</small></address>
+</body>
+</html>
