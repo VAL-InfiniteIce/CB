@@ -206,19 +206,25 @@ execInteger(const syntree_node_t* node)
 static void
 execFloat(const syntree_node_t* node)
 {
-	/* TODO: Implementation */
+    vm->eax.type = node->type;
+    vm->eax.value.real = node->value.real;
+    TRACE_VALUE(vm->eax);
 }
 
 static void
 execBoolean(const syntree_node_t* node)
 {
-	/* TODO: Implementation */
+    vm->eax.type = node->type;
+    vm->eax.value.boolean = node->value.boolean;
+    TRACE_VALUE(vm->eax);
 }
 
 static void
 execString(const syntree_node_t* node)
 {
-	/* TODO: Implementation */
+    vm->eax.type = node->type;
+    vm->eax.value.string = node->value.string;
+    TRACE_VALUE(vm->eax);
 }
 
 static void
