@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Minako: Hauptseite</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="minako.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Minako
+   </div>
+   <div id="projectbrief">Dokumentation des studentischen Programminterpreters &quot;Minako&quot;.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Erzeugt von Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Suchen');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('index.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">Minako Dokumentation</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h1><a class="anchor" id="Einführung"></a>
+Einführung</h1>
+<p>Der Minako-Interpreter soll die Semantik der Sprache C1 implementieren. Dieses Dokument wurde durch Doxygen aus den Quelldateien des Interpreters abgeleitet und dokumentiert die Datenstrukturen und Schnittstellen des Projektes.</p>
+<h1><a class="anchor" id="Syntax"></a>
+Syntax</h1>
+<p>Hier ist die durch Minako implementierte C1-Grammatik in <a href="https://www.w3.org/TR/REC-xml/#sec-notation">W3C-EBNF</a>. Zur besseren Anschaulichkeit sind <a href="minako.xhtml">hier</a> Syntaxdiagramme hinterlegt. Die Semantik von Syntaxdiagrammen ist <a href="https://de.wikipedia.org/wiki/Syntaxdiagramm">hier</a> erklärt.</p>
+<pre class="fragment">program            ::= (declassignment ";" | functiondefinition)*
+
+functiondefinition ::= type ID "(" parameterlist? ")" "{" statementlist "}"
+parameterlist      ::= type ID ("," type ID)*
+
+functioncall       ::= ID "(" (assignment ("," assignment)*)? ")"
+statementlist      ::= statement*
+block              ::= "{" statementlist "}"
+statement          ::= ifstatement
+                     | forstatement
+                     | whilestatement
+                     | returnstatement ";"
+                     | dowhilestatement ";"
+                     | printf ";"
+                     | declassignment ";"
+                     | statassignment ";"
+                     | functioncall ";"
+                     | block
+
+ifstatement        ::= "if" "(" assignment ")" statement ("else" statement)?
+forstatement       ::= "for" "(" (statassignment | declassignment) ";" expr ";" statassignment ")" statement
+dowhilestatement   ::= "do" statement "while" "(" assignment ")"
+whilestatement     ::= "while" "(" assignment ")" statement
+returnstatement    ::= "return" assignment?
+printf             ::= "printf" "(" (assignment | CONST_STRING) ")"
+
+declassignment     ::= type ID ("=" assignment)?
+type               ::= "bool" | "float" | "int" | "void"
+statassignment     ::= ID "=" assignment
+assignment         ::= ID "=" assignment | expr
+
+expr               ::= simpexpr (("==" | "!=" | "&lt;=" | "&gt;=" | "&lt;" | "&gt;") simpexpr)?
+simpexpr           ::= ("-" term | term) (("+" | "-" | "||") term)*
+term               ::= factor (("*" | "/" | "&amp;&amp;") factor)*
+factor             ::= CONST_INT | CONST_FLOAT | CONST_BOOLEAN
+                     | functioncall
+                     | ID
+                     | "(" assignment ")"
+
+ID                 ::= [a-zA-Z_][a-zA-Z0-9_]*
+CONST_STRING       ::= '"' [^"\n]* '"'
+CONST_INT          ::= [0-9]+
+CONST_BOOLEAN      ::= "true" | "false"
+CONST_FLOAT        ::= ([0-9]* "." [0-9]+ ([eE] [-+]? [0-9]+)?)
+                     | ([0-9]+ [eE] [-+]? [0-9]+)
+</pre><h1><a class="anchor" id="Semantik"></a>
+Semantik</h1>
+<p>Ein Sichtbarkeitsbereich ist ein Abschnitt des Quellcodes, der zu folgenden Metasymbolen reduziert wird:</p><ul>
+<li><code>block</code></li>
+<li><code>forstatement</code></li>
+<li><code>functiondefinition</code>, wobei der Funktionsname Teil des äußeren Sichtbarkeitsbereiches ist</li>
+</ul>
+<p>Die Grammatik erlaubt eine Schichtung von Sichtbarkeitsbereichen. Die äußere Schicht wird als globale Schicht bezeichnet. C1 unterstützt die implizite Konvertierung von <code>int</code> nach <code>float</code> für Zuweisungen und bei Rückgabewerten. Ein Typ wird als kompatibel zu einem zweiten Typ bezeichnet, wenn er in den anderen konvertierbar ist.</p>
+<p>Folgende semantische Regeln gelten in C1:</p><ol type="1">
+<li>Es muss eine parameterlose <code>main()</code>-Funktion mit dem Rückgabetyp <code>void</code> geben.</li>
+<li>Bezeichner müssen vor ihrer Benutzung deklariert werden.</li>
+<li>Die äußere Schicht eines Sichtbarkeitsbereiches darf keinen Bezeichner doppelt enthalten.</li>
+<li>Bei der Namensauflösung von Bezeichnern, werden die Sichtbarkeitsbereiche von innen nach außen durchsucht und der erste Treffer ausgewählt.</li>
+<li>Die Bedingungen für <code>while</code>, <code>do while</code>, <code>for</code> und <code>if</code> sind boolesche Ausdrücke.</li>
+<li>Funktionsrufe sind parameterkonform.<ul>
+<li>Parameter- und Argumentlisten haben identische Länge</li>
+<li>Parameter- und Argumenttypen sind paarweise identisch (und nicht nur kompatibel!)</li>
+</ul>
+</li>
+<li>Der Typ des Rückgabewertes ist kompatibel zum Rückgabetyp der aktuell definierten Funktion.</li>
+<li>Zuweisungen erfolgen nur in zuweisungsfähige Strukturen und der Typ der rechten Seite ist kompatibel zum Typ der linken Seite.</li>
+<li>Operatoren haben die in C übliche Bedeutung. </li>
+</ol>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Erzeugt von
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

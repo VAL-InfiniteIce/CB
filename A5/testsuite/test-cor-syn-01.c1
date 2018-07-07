@@ -1,0 +1,32 @@
+int a = 0;
+float b = 1.2;
+bool c = true;
+
+int d;
+float e;
+bool f;
+
+void a1() {}
+int a2(int p) { return 0;}
+float a3(int p1, int p2) { return 0.0; }
+
+bool b1() {
+	a1(); a2(0); a3(a, 1);
+}
+
+void b2() {
+	if (a<10) if (a<5) { a1(); } else { a2(0); }
+	for (int i=0; i<5; i=i+1) { a1(); }
+	for (a=0; a<5; a=a+1) { a1(); }
+	while (a<5) { a1(); }
+	do { a1(); } while (a<5);
+	printf(false);
+	a = 5;
+	int g = 5;
+	a = g+a*42+(23/7);
+}
+
+void main() {
+	b2();
+	printf(true);
+}

@@ -1,0 +1,13 @@
+// Testprogramm aus Testsuite
+
+bool a = true;
+
+void test() {
+	a = false;
+}
+
+void main() {
+	int a = 1;
+	int b = 2;
+	printf(test());
+}
