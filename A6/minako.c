@@ -339,6 +339,15 @@ static void
 execFor(const syntree_node_t* node)
 {
 	/* TODO: Implementation */
+    const syntree_node_t* def = nodeFirst(node);
+    const syntree_node_t* con = nodeNext(def);
+    const syntree_node_t* ass = nodeNext(con);
+    const syntree_node_t* exe = nodeNext(ass);
+    
+    for (dispatch(def); dispatch(con).value.boolean; dispatch(ass))
+    {
+        dispatch(exe);
+    }
 }
 
 static void
@@ -372,6 +381,7 @@ execPrint(const syntree_node_t* node)
 static void
 execAssign(const syntree_node_t* node)
 {
+    printf("VAR\n");
 	/* TODO: Implementation */
 }
 
