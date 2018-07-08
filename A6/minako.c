@@ -286,7 +286,9 @@ execSequence(const syntree_node_t* node)
 {
 	/* TODO: Abarbeitung der gesamten Sequenz implementieren */
 	if (!nodeSentinel(nodeFirst(node)))
+    {
 		dispatch(nodeFirst(node));
+    }
 }
 
 static void
@@ -299,7 +301,7 @@ execIf(const syntree_node_t* node)
 	if (dispatch(test).value.boolean)
 		dispatch(cons);
 	else 
-		; /* TODO: else-Fall implementieren */
+		dispatch(nodeNext(cons));
 }
 
 static void
