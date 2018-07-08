@@ -323,7 +323,16 @@ execDoWhile(const syntree_node_t* node)
 static void
 execWhile(const syntree_node_t* node)
 {
-	/* TODO: Implementation */
+	const syntree_node_t* cond = nodeFirst(node);
+	const syntree_node_t* exec = nodeLast(node);
+	
+	while (dispatch(cond).value.boolean)
+	{
+		dispatch(exec);
+		
+		if (vm->returnFlag)
+			break;
+	}
 }
 
 static void
